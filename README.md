@@ -18,16 +18,9 @@ An unchanged copy is retained in docs/ASSESSMENT_BRIEF.md.
 See BUILD_PLAN.md for requirement gates, stopping rules and documentation updates.
 
 ## Running
-Python 3.10+; standard library only. Assessment datasets and starter fixtures are currently local-only, not published in this repository. First acquire the pinned original files using one of these alternatives:
+Python 3.10+; standard library only. Original assessment data and starter fixtures are included unchanged, with explicit permission to publish them in this public repository. No download or installation is needed.
 
-```bash
-# One-time preparation requiring network access to the original public assessment:
-python3 prepare_inputs.py
-# Or, fully offline, copy from your existing original assessment checkout:
-python3 prepare_inputs.py --source /path/to/2026-backend-engineer-assessment
-```
-
-Then run these commands entirely offline from this repository root:
+Run entirely offline from this repository root:
 
 ```bash
 python3 audit_data.py
@@ -68,5 +61,5 @@ The 20-case manual failure analysis and label adjudication require Sadad's perso
 ## Commit policy
 Work directly on main as requested. Commit each coherent, verified milestone with its purpose, updating related documentation in the same commit. No force pushes, invented retrospective logs, or single final solution commit. Experimental failures may be committed with an explicit status; never label a known failure as passing.
 
-## Pending publication / packaging
-Automatic approval review blocked uploading assessment datasets to this public repository because dataset publication was not explicitly authorised. Code, checksums and aggregate reports are published; data/ and starter/ remain ignored and local. Explicit user approval is needed before publishing fixtures. Final submission still needs an approved self-contained offline package; a network-only preparation step is not a claim that this final requirement is complete. The online acquisition path has not been exercised here; checksum verification and offline copying have been tested.
+## Fixture provenance
+The user explicitly approved publishing the original data and starter files on 2026-09-22. All 13 files match their pinned original Git blob hashes, including the compressed reference. prepare_inputs.py is an optional checksum-verified recovery tool, not a required setup step.

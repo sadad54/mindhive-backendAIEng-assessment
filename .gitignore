@@ -5,7 +5,4 @@ __pycache__/
 *.sqlite-*
 .pytest_cache/
 
-# Assessment fixtures stay local pending explicit publication approval.
-data/
-starter/
 *.download
