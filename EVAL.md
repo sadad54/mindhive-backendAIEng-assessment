@@ -89,3 +89,22 @@ All tested points lose utility against all-review. Increasing the score threshol
 The report's failure_review_queue contains 20 wrong *proposed* answers at threshold 0.90, with source text, label and candidates. These are genuine failures of the recorded experimental policy, not production auto decisions. Root cause, cost class and proposed fix are blank for Sadad's personal work. Extracting traces does not complete the required manual analysis or three label concerns.
 
 Known limits: incomplete pack/quantity distinction, brand spelling not canonicalised as authoritative evidence, partial attribute vocabularies, and a single global score rule. Validation remains unscored for this experiment. Next decisions should follow the personal case review and development evidence, not repeated validation tuning.
+
+## Personal review 01 — ACM-T-0009
+Status: Sadad supplied his judgement in the guided review; clarification remains unresolved. AI organised the source evidence and edited this entry. This is 1 of 20 cases discussed, not completion of the full analysis.
+
+**Observed failure:** The threshold-0.90 experimental policy proposes ACM-BALL0659 for `Remax/Ball/Valve/2"/SS304`; supplied gt_item_code is blank. Similarity is 1.0. This is a false-positive proposal against the official label, not an enabled production auto-match.
+
+**Evidence:** The tenant's catalogue contains one exact-name match, disabled=0, available_qty=0, stock_uom=Nos and carton conversion 12. Order quantity is 50, with no UOM, buyer SKU or barcode. No price is supplied. Other inspected Remax 2-inch valves differ in material.
+
+**Sadad's judgement:** The product appears correctly identified, but stock prevents current fulfilment. Flag the disagreement for label/business-rule clarification rather than immediately changing the identity matcher. Keeping the distinction permits a specific customer response and an inventory notification.
+
+**Root-cause assessment:** Suspected specification/label ambiguity, not a confirmed label defect. We have not established that zero stock explains the blank label or that the catalogue stock snapshot represents inventory on the order date. Missing UOM is another unresolved detail; full quantity conversion is not inferred.
+
+**Cost class:** Wrong-auto proposal under supplied labels (800 seconds-equivalent in our convention); if identity is confirmed, the operational issue is fulfilment rather than demonstrated wrong-product shipment.
+
+**Proposed response:** Ask whether item resolution must abstain for unavailable stock and how inventory timing/UOM are treated in annotation. Preserve official labels and primary metrics. Record any adjudication separately. A production inventory message should use current verified stock and a defined fulfilment policy; notifications are outside this assessment's matching scope.
+
+**Regression proposal (assistant-suggested, not yet implemented):** Under an explicitly confirmed identity-only contract, changing stock availability alone should not change the resolved product. If availability is a separate acceptance rule, test its review reason independently. Do not encode a per-line exception or replace the label before adjudication.
+
+**Grouping:** First candidate in the specification/label-clarification group. No assumption that other blank-labelled cases share this cause.
