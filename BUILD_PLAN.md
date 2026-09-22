@@ -109,3 +109,6 @@ Delivered pinned source fixtures/manifest, audit, tenant-scoped loader, label-fr
 
 ## Checkpoint — approved fixtures and identifier evidence
 Original fixtures now included unchanged with explicit publication permission. Frozen split: 306 development / 114 validation. Identifier evidence retrieval implemented and tested separately from acceptance; 17 tests pass. Development report compares aliases versus cold start. Next: complete attribute conflict checks and lexical candidate generation, then measure confidence/acceptance. Actual auto matching, threshold curve and final calibration remain incomplete.
+
+## Checkpoint — lexical retrieval and rejected proposal policy
+Delivered development-only lexical retrieval, explicit attribute checks, threshold proposal curve and 25 passing tests. Top-three target retrieval: 210/220 answerable development rows. All tested acceptance proposals lose net value, so auto acceptance remains disabled. Twenty case traces prepared; personal analysis still incomplete. Prioritise review of these failures before more score tuning; preserve protected report/sync time.

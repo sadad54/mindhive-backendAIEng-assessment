@@ -1,0 +1,680 @@
+{
+  "scope": "development only; provisional rule proposals, not calibrated final predictions",
+  "data_sha256": {
+    "order_lines_train.csv": "8e4e983045926d01accac152d5df62c3af9d6726516999b4ef80e90dee370313",
+    "catalogue_acme.csv": "b895ac21aca526e7d91a3a3884a36812f882f6c57ac729a0f55ea9ad5df467ae",
+    "catalogue_nordic.csv": "7543bd3f4f0ad3321b141780bbcf4d21b1fe6956710b6e29ad709459e93f1941",
+    "customer_sku_map.csv": "5d71b025cc77d296065c7fba02b9925efe751618f9a7c7ce74cc59a61793fa37"
+  },
+  "split_sha256": "e8d84837c11ef4e50f55a73a8788dea7be742766baa71f1cb5c5ee4c60a288ad",
+  "source_sha256": {
+    "inspect_lexical.py": "07671ae2f842e5e06c3ae00a6f633c029fe06c652cf646c76af0b5313ace3907",
+    "evaluate.py": "60d7b2e88a4cadb22e7c672d850c52b7a2bfeca85a19a9757d3641d557a902f0",
+    "matcher/__init__.py": "2b13c613a6f7dcddcb0734f8f1168a496296c92ab7c8c7717f8cb7e8e017c8f6",
+    "matcher/core.py": "2e7220523a5410c4b5a575909a685479614d88f55d4ddfc106ae25aca8230339",
+    "matcher/data.py": "3d053a8d7d933d8d1d4559b19bdbe43e3859734d9e95ba5c08a8e631d3182a7b",
+    "matcher/identifiers.py": "7e5a8208bdc662a00dada32cc2d62ee21ec668be5a7e949ecfc12333c6134fa6",
+    "matcher/lexical.py": "5de4256dbc19120b7e8904cf090c53727c6e680e8de4e0fc8073d2c57e6c5cdc"
+  },
+  "lines": 306,
+  "answerable": 220,
+  "target_in_top3": 210,
+  "recall_at_3": 0.9545454545454546,
+  "failure_review_queue": [
+    {
+      "line_id": "ACM-T-0009",
+      "tenant": "acme",
+      "raw_text": "Remax/Ball/Valve/2\"/SS304",
+      "qty": "50",
+      "uom_text": "",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-BALL0659",
+      "candidates": [
+        {
+          "code": "ACM-BALL0659",
+          "score": 1.0,
+          "name": "Remax Ball Valve 2\" SS304"
+        },
+        {
+          "code": "ACM-BALL0601",
+          "score": 0.7904885,
+          "name": "Remax Ball Valve 2\" Brass"
+        },
+        {
+          "code": "ACM-BALL0215",
+          "score": 0.78799614,
+          "name": "Remax Ball Valve 2\" PVC"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0022",
+      "tenant": "acme",
+      "raw_text": "Kanto Nitrile Glove M Blue",
+      "qty": "100",
+      "uom_text": "box",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-NITR0925",
+      "candidates": [
+        {
+          "code": "ACM-NITR0925",
+          "score": 1.0,
+          "name": "Kanto Nitrile Glove M Blue"
+        },
+        {
+          "code": "ACM-NITR0715",
+          "score": 0.83807692,
+          "name": "Kanto Nitrile Glove S Blue"
+        },
+        {
+          "code": "ACM-NITR0872",
+          "score": 0.83807692,
+          "name": "Kanto Nitrile Glove L Blue"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0062",
+      "tenant": "acme",
+      "raw_text": "Vermont/Ball/Valve/2\"/Brass",
+      "qty": "2",
+      "uom_text": "unit",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-BALL0944",
+      "candidates": [
+        {
+          "code": "ACM-BALL0944",
+          "score": 1.0,
+          "name": "Vermont Ball Valve 2\" Brass"
+        },
+        {
+          "code": "ACM-BALL0525",
+          "score": 0.79580958,
+          "name": "Vermont Ball Valve 2\" SS304"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0079",
+      "tenant": "acme",
+      "raw_text": "Vermont Ball Valve 1/2\" SS304",
+      "qty": "1",
+      "uom_text": "ctn",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-BALL0364",
+      "candidates": [
+        {
+          "code": "ACM-BALL0364",
+          "score": 1.0,
+          "name": "Vermont Ball Valve 1/2\" SS304"
+        },
+        {
+          "code": "ACM-BALL0364B",
+          "score": 0.93464269,
+          "name": "Vermont Ball Valve 1/2\" SS304 (Bulk)"
+        },
+        {
+          "code": "ACM-BALL0879",
+          "score": 0.80049552,
+          "name": "Vermont Ball Valve 1/2\" Brass"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0082",
+      "tenant": "acme",
+      "raw_text": "Hitex PVC Pipe 32mm Class E",
+      "qty": "6",
+      "uom_text": "unit",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-PVCP0447",
+      "candidates": [
+        {
+          "code": "ACM-PVCP0447",
+          "score": 1.0,
+          "name": "Hitex PVC Pipe 32mm Class E"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0114",
+      "tenant": "acme",
+      "raw_text": "Stallion Self Drilling Screw #10 x 1'' Stainless",
+      "qty": "100",
+      "uom_text": "",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-SELF0720",
+      "candidates": [
+        {
+          "code": "ACM-SELF0720",
+          "score": 0.95708468,
+          "name": "Stallion Self Drilling Screw #10 x 1\" Stainless 410"
+        },
+        {
+          "code": "ACM-SELF0056",
+          "score": 0.87872454,
+          "name": "Stallion Self Drilling Screw #8 x 1\" Stainless 410"
+        },
+        {
+          "code": "ACM-HEXB0365",
+          "score": 0.47751402,
+          "name": "Stallion Hex Bolt M10x50 Stainless 304"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0123",
+      "tenant": "acme",
+      "raw_text": "Bosco Nitrile Glove L Black",
+      "qty": "2",
+      "uom_text": "unit",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-NITR0671",
+      "candidates": [
+        {
+          "code": "ACM-NITR0671",
+          "score": 1.0,
+          "name": "Bosco Nitrile Glove L Black"
+        },
+        {
+          "code": "ACM-NITR0492",
+          "score": 0.84915854,
+          "name": "Bosco Nitrile Glove XL Black"
+        },
+        {
+          "code": "ACM-NITR0240",
+          "score": 0.84,
+          "name": "Bosco Nitrile Glove M Black"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0130",
+      "tenant": "acme",
+      "raw_text": "Remax Self Drilling Screw #8 x 1\" Zinc Plated",
+      "qty": "5",
+      "uom_text": "",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-SELF0072",
+      "candidates": [
+        {
+          "code": "ACM-SELF0072",
+          "score": 1.0,
+          "name": "Remax Self Drilling Screw #8 x 1\" Zinc Plated"
+        },
+        {
+          "code": "ACM-SELF0694",
+          "score": 0.91383241,
+          "name": "Remax Self Drilling Screw #10 x 1\" Zinc Plated"
+        },
+        {
+          "code": "ACM-HEXB0053",
+          "score": 0.5050166,
+          "name": "Remax Hex Bolt M8x50 Zinc Plated"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0134",
+      "tenant": "acme",
+      "raw_text": "Tolsen Hex Bolt M8x50 HDG",
+      "qty": "50",
+      "uom_text": "ctn",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-HEXB0675",
+      "candidates": [
+        {
+          "code": "ACM-HEXB0675",
+          "score": 1.0,
+          "name": "Tolsen Hex Bolt M8x50 HDG"
+        },
+        {
+          "code": "ACM-HEXB0675B",
+          "score": 0.93305454,
+          "name": "Tolsen Hex Bolt M8x50 HDG (Bulk)"
+        },
+        {
+          "code": "ACM-HEXB0153",
+          "score": 0.88303571,
+          "name": "Tolsen Hex Bolt M6x50 HDG"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0142",
+      "tenant": "acme",
+      "raw_text": "Kanto PVC Pipe 25mm Class C",
+      "qty": "100",
+      "uom_text": "pcs",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-PVCP1037",
+      "candidates": [
+        {
+          "code": "ACM-PVCP1037",
+          "score": 1.0,
+          "name": "Kanto PVC Pipe 25mm Class C"
+        },
+        {
+          "code": "ACM-HOSE0102",
+          "score": 0.40942523,
+          "name": "Kanto Hose Clip 19-25mm Zinc"
+        },
+        {
+          "code": "ACM-HOSE0857",
+          "score": 0.40377847,
+          "name": "Kanto Hose Clip 19-25mm SS304"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0150",
+      "tenant": "acme",
+      "raw_text": "Vermont Self Drilling Screw #10 x 1\" Zinc Plated",
+      "qty": "5",
+      "uom_text": "packet",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-SELF0108",
+      "candidates": [
+        {
+          "code": "ACM-SELF0108",
+          "score": 1.0,
+          "name": "Vermont Self Drilling Screw #10 x 1\" Zinc Plated"
+        },
+        {
+          "code": "ACM-SELF0068",
+          "score": 0.91501905,
+          "name": "Vermont Self Drilling Screw #8 x 1\" Zinc Plated"
+        },
+        {
+          "code": "ACM-HEXB0223",
+          "score": 0.5205027,
+          "name": "Vermont Hex Bolt M10x75 Zinc Plated"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0157",
+      "tenant": "acme",
+      "raw_text": "Tolsen - PVC - Pipe - 25mm - Class - C",
+      "qty": "6",
+      "uom_text": "length",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-PVCP0117",
+      "candidates": [
+        {
+          "code": "ACM-PVCP0117",
+          "score": 1.0,
+          "name": "Tolsen PVC Pipe 25mm Class C"
+        },
+        {
+          "code": "ACM-HOSE0185",
+          "score": 0.41879143,
+          "name": "Tolsen Hose Clip 19-25mm Zinc"
+        },
+        {
+          "code": "ACM-HOSE0911",
+          "score": 0.41252618,
+          "name": "Tolsen Hose Clip 19-25mm SS304"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0161",
+      "tenant": "acme",
+      "raw_text": "Hitex Angle Grinder Disc 4.5\" Flap",
+      "qty": "5",
+      "uom_text": "",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-ANGL0411",
+      "candidates": [
+        {
+          "code": "ACM-ANGL0411",
+          "score": 1.0,
+          "name": "Hitex Angle Grinder Disc 4.5\" Flap"
+        },
+        {
+          "code": "ACM-ANGL0411B",
+          "score": 0.93750684,
+          "name": "Hitex Angle Grinder Disc 4.5\" Flap (Bulk)"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0174",
+      "tenant": "acme",
+      "raw_text": "Tolsen Hex Bolt M8x50",
+      "qty": "1",
+      "uom_text": "ctn",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-HEXB0675",
+      "candidates": [
+        {
+          "code": "ACM-HEXB0675",
+          "score": 0.93109694,
+          "name": "Tolsen Hex Bolt M8x50 HDG"
+        },
+        {
+          "code": "ACM-HEXB0675B",
+          "score": 0.8688157,
+          "name": "Tolsen Hex Bolt M8x50 HDG (Bulk)"
+        },
+        {
+          "code": "ACM-HEXB0876",
+          "score": 0.85247787,
+          "name": "Tolsen Hex Bolt M8x50 Zinc Plated"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0177",
+      "tenant": "acme",
+      "raw_text": "- Vermont Self Drilling Screw #10 x 1-1/2\" Stainless 410",
+      "qty": "3",
+      "uom_text": "unit",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-SELF0464",
+      "candidates": [
+        {
+          "code": "ACM-SELF0464",
+          "score": 1.0,
+          "name": "Vermont Self Drilling Screw #10 x 1-1/2\" Stainless 410"
+        },
+        {
+          "code": "ACM-BALL0364",
+          "score": 0.35883814,
+          "name": "Vermont Ball Valve 1/2\" SS304"
+        },
+        {
+          "code": "ACM-BALL0364B",
+          "score": 0.33536945,
+          "name": "Vermont Ball Valve 1/2\" SS304 (Bulk)"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0182",
+      "tenant": "acme",
+      "raw_text": "Stallion PVC Pipe 15mm Class E",
+      "qty": "2",
+      "uom_text": "",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-PVCP0541",
+      "candidates": [
+        {
+          "code": "ACM-PVCP0541",
+          "score": 1.0,
+          "name": "Stallion PVC Pipe 15mm Class E"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0196",
+      "tenant": "acme",
+      "raw_text": "Bosco Ball Valve 1/2\" SS304",
+      "qty": "50",
+      "uom_text": "pcs",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-BALL0305",
+      "candidates": [
+        {
+          "code": "ACM-BALL0305",
+          "score": 1.0,
+          "name": "Bosco Ball Valve 1/2\" SS304"
+        },
+        {
+          "code": "ACM-BALL0289",
+          "score": 0.79580958,
+          "name": "Bosco Ball Valve 1/2\" Brass"
+        },
+        {
+          "code": "ACM-BALL0865",
+          "score": 0.79363355,
+          "name": "Bosco Ball Valve 1/2\" PVC"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0202",
+      "tenant": "acme",
+      "raw_text": "Hitex Angle Grinder Disc 4.5\" Flap",
+      "qty": "12",
+      "uom_text": "",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-ANGL0411",
+      "candidates": [
+        {
+          "code": "ACM-ANGL0411",
+          "score": 1.0,
+          "name": "Hitex Angle Grinder Disc 4.5\" Flap"
+        },
+        {
+          "code": "ACM-ANGL0411B",
+          "score": 0.93750684,
+          "name": "Hitex Angle Grinder Disc 4.5\" Flap (Bulk)"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0212",
+      "tenant": "acme",
+      "raw_text": "Stallion Self Drilling Screw #8 x 3/4\" Stainless 410",
+      "qty": "100",
+      "uom_text": "ea",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-SELF0989",
+      "candidates": [
+        {
+          "code": "ACM-SELF0989",
+          "score": 1.0,
+          "name": "Stallion Self Drilling Screw #8 x 3/4\" Stainless 410"
+        },
+        {
+          "code": "ACM-BALL0750",
+          "score": 0.40559914,
+          "name": "Stallion Ball Valve 3/4\" SS304"
+        },
+        {
+          "code": "ACM-HEXB0283",
+          "score": 0.34226515,
+          "name": "Stallion Hex Bolt M8x30 HDG"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    },
+    {
+      "line_id": "ACM-T-0218",
+      "tenant": "acme",
+      "raw_text": "Tolsen PVC Pipe 40mm Class C",
+      "qty": "10",
+      "uom_text": "ea",
+      "buyer_sku": "",
+      "raw_barcode": "",
+      "supplied_label": "",
+      "proposed_item": "ACM-PVCP0471",
+      "candidates": [
+        {
+          "code": "ACM-PVCP0471",
+          "score": 1.0,
+          "name": "Tolsen PVC Pipe 40mm Class C"
+        }
+      ],
+      "root_cause_by_sadad": null,
+      "cost_class_by_sadad": null,
+      "proposed_fix_by_sadad": null
+    }
+  ],
+  "curve": [
+    {
+      "similarity_threshold": 0.6,
+      "auto_proposals": 196,
+      "correct": 166,
+      "wrong": 30,
+      "precision": 0.8469387755102041,
+      "coverage": 0.6405228758169934,
+      "improvement_over_review": -12840
+    },
+    {
+      "similarity_threshold": 0.7,
+      "auto_proposals": 191,
+      "correct": 161,
+      "wrong": 30,
+      "precision": 0.8429319371727748,
+      "coverage": 0.6241830065359477,
+      "improvement_over_review": -13140
+    },
+    {
+      "similarity_threshold": 0.8,
+      "auto_proposals": 165,
+      "correct": 136,
+      "wrong": 29,
+      "precision": 0.8242424242424242,
+      "coverage": 0.5392156862745098,
+      "improvement_over_review": -13880
+    },
+    {
+      "similarity_threshold": 0.85,
+      "auto_proposals": 149,
+      "correct": 121,
+      "wrong": 28,
+      "precision": 0.8120805369127517,
+      "coverage": 0.4869281045751634,
+      "improvement_over_review": -14020
+    },
+    {
+      "similarity_threshold": 0.9,
+      "auto_proposals": 128,
+      "correct": 101,
+      "wrong": 27,
+      "precision": 0.7890625,
+      "coverage": 0.41830065359477125,
+      "improvement_over_review": -14460
+    },
+    {
+      "similarity_threshold": 0.95,
+      "auto_proposals": 98,
+      "correct": 73,
+      "wrong": 25,
+      "precision": 0.7448979591836735,
+      "coverage": 0.3202614379084967,
+      "improvement_over_review": -14620
+    },
+    {
+      "similarity_threshold": 1.0,
+      "auto_proposals": 78,
+      "correct": 54,
+      "wrong": 24,
+      "precision": 0.6923076923076923,
+      "coverage": 0.2549019607843137,
+      "improvement_over_review": -15000
+    }
+  ],
+  "timing": {
+    "preparation_ms": 171.11638499955006,
+    "warm_p95_ms": 43.117832,
+    "samples": 306
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39"
+  },
+  "limitations": [
+    "Development selection is optimistic; validation untouched",
+    "Numeric quantity and pack parsing incomplete",
+    "No confidence calibration or final auto policy",
+    "One timed warm pass on execution host, not laptop benchmark"
+  ]
+}

@@ -64,3 +64,28 @@ A frozen deterministic grouped allocation has 306 development lines and 114 vali
 | Unique candidate with no detected issue | 15 | 8 |
 
 These are not auto precision/coverage or proof of calibration. The evidence component is not yet wired to an acceptance policy. Multiple source targets, weak alias metadata, invalid/expired mappings, unknown identifiers and numeric inconsistencies are flagged. Metadata/conflict counts can overlap. Remaining work includes brand/material checks, quantity parsing, lexical retrieval, and confidence/policy evaluation. No final predictions generated.
+
+## Lexical development experiment — an unsafe acceptance baseline
+Command: `python3 inspect_lexical.py`. Raw report: reports/lexical_development.json (input/split/source hashes and environment included). Twenty-five tests pass.
+
+Token cosine (55%) and character-trigram cosine (45%) retrieve tenant-eligible products. These initial weights and the 0.25 retrieval floor are engineering starting choices, not learned probabilities. Known attribute contradictions filter candidates; identifier conflict flags persist. Provisional policy proposals require no detected issue, >=0.05 top-two score margin and the listed similarity threshold. They are evaluated only on development data; no policy has been enabled.
+
+Top-three retrieval contains the supplied target for 210/220 answerable development lines (95.45%). There are 306 total development lines. Retrieval can help human review, but this does not demonstrate safe automatic decisions.
+
+| Similarity threshold | Proposals | Correct | Wrong | Precision | Coverage | Improvement vs review |
+|---|---:|---:|---:|---:|---:|---:|
+| 0.60 | 196 | 166 | 30 | 84.69% | 64.05% | -12840 |
+| 0.70 | 191 | 161 | 30 | 84.29% | 62.42% | -13140 |
+| 0.80 | 165 | 136 | 29 | 82.42% | 53.92% | -13880 |
+| 0.85 | 149 | 121 | 28 | 81.21% | 48.69% | -14020 |
+| 0.90 | 128 | 101 | 27 | 78.91% | 41.83% | -14460 |
+| 0.95 | 98 | 73 | 25 | 74.49% | 32.03% | -14620 |
+| 1.00 | 78 | 54 | 24 | 69.23% | 25.49% | -15000 |
+
+Recorded preparation: 171.116 ms; warm retrieval p95: 43.118 ms across 306 calls after a warm pass. This is an execution-host experiment, not a laptop certification or repeated performance study.
+
+All tested points lose utility against all-review. Increasing the score threshold does not monotonically improve precision; the score-1.0 group still disagrees with supplied labels. No automatic policy or calibrated confidence is justified yet. These results may combine implementation limitations, missing context, and questionable labels; do not assert which without case inspection. Preserve original labels for primary metrics.
+
+The report's failure_review_queue contains 20 wrong *proposed* answers at threshold 0.90, with source text, label and candidates. These are genuine failures of the recorded experimental policy, not production auto decisions. Root cause, cost class and proposed fix are blank for Sadad's personal work. Extracting traces does not complete the required manual analysis or three label concerns.
+
+Known limits: incomplete pack/quantity distinction, brand spelling not canonicalised as authoritative evidence, partial attribute vocabularies, and a single global score rule. Validation remains unscored for this experiment. Next decisions should follow the personal case review and development evidence, not repeated validation tuning.

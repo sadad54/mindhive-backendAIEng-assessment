@@ -50,3 +50,17 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** Separate Evidence object with codes, sources and issues; retain review baseline pending full arbitration/calibration.
 **Evidence:** Development-only report finds targets for 27 lines with aliases versus 9 cold-start; 17 tests pass. Numeric checks remain incomplete; no automatic precision claimed.
 **Reversal trigger:** Sufficient conflict checks and labelled evaluation support a documented confidence mapping and acceptance policy.
+
+## D-08 — Use lexical similarity for retrieval, not as calibrated confidence
+**Context:** Identifier retrieval reaches only 27 development targets with aliases; noisy product descriptions need catalogue search.
+**Options:** Token-only search; combined token/character retrieval; local embeddings now.
+**Chose:** Initial deterministic 55% token/45% character-trigram cosine, explicit attribute conflicts and tenant scope. Weights are starting choices, not optimised/calibrated probabilities. No embedding comparison has been run.
+**Evidence:** 210/220 development targets appear in top three; tests preserve fractions and reject wrong-size/brand/material alternatives. See lexical_development.json for measurements.
+**Reversal trigger:** Case inspection shows systematic retrieval failures or latency/cost evidence justifies another method; compare against this retained baseline.
+
+## D-09 — Do not enable the provisional similarity-threshold policy
+**Context:** Retrieval success does not imply correct automatic decisions.
+**Options:** Accept high scores; tune until the reported number looks good; retain review and investigate observed failures.
+**Chose:** Leave evaluate.py on all-review, record the entire tested curve, and provide case traces for personal inspection before a new acceptance policy.
+**Evidence:** Every tested development threshold from 0.60 to 1.00 has negative improvement over review. At 1.00, 54 of 78 proposed answers are correct against supplied labels. Validation/holdout not used to choose this decision.
+**Reversal trigger:** Better evidence checks plus calibration and a frozen validation evaluation justify an operating point. Do not rewrite official labels to make the curve pass.

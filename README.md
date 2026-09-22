@@ -28,7 +28,7 @@ python3 -m unittest discover -s tests -v
 python3 evaluate.py --repeat 5 --output reports/baseline_review.json
 ```
 
-The evaluation currently sends every labelled line for review. It provides a reproducible comparison point, not a completed matcher. It prints overall, tenant and overlapping input-noise-proxy metrics; `null` means a metric is undefined. Seventeen tests protect metric arithmetic, tenant/eligibility checks, label separation, leading zeros, determinism through the evaluator, and p95 calculation. Local input data and starter code were imported byte-for-byte at the pinned revision; `docs/INPUT_MANIFEST.json` records their hashes. `audit_data.py` intentionally verifies original fixtures, so later authorised starter changes require an explicit provenance/audit policy update, not silently replacing the original hashes.
+The evaluation currently sends every labelled line for review. It provides a reproducible comparison point, not a completed matcher. It prints overall, tenant and overlapping input-noise-proxy metrics; `null` means a metric is undefined. Twenty-five tests protect metric arithmetic, tenant/eligibility checks, label separation, leading zeros, determinism through the evaluator, and p95 calculation. Local input data and starter code were imported byte-for-byte at the pinned revision; `docs/INPUT_MANIFEST.json` records their hashes. `audit_data.py` intentionally verifies original fixtures, so later authorised starter changes require an explicit provenance/audit policy update, not silently replacing the original hashes.
 
 Saved reports contain actual measurements and environment/code/data hashes. The p95 currently measures only review-only overhead on the execution host; it does not establish the future matcher's laptop performance. Holdout bytes are preserved but rows have not been inspected or used for tuning. No `predictions.csv` is generated yet.
 
@@ -42,7 +42,7 @@ Saved reports contain actual measurements and environment/code/data hashes. The 
 | PERF.md | Requirements outline; no benchmarks yet |
 | SYNC.md | Requirements outline; no fixes/tests yet |
 | SCALE.md | Requirements outline; final analysis depends on measurements |
-| Source and tests | Review baseline and evaluator; 17 tests pass |
+| Source and tests | Review baseline and evaluator; 25 tests pass |
 
 ## Assumptions and questions
 - Cost convention: U = 20C - 800W - 40A (correct autos, wrong autos, abstentions). This is our explicit interpretation, not a published grader formula. Record raw counts and sensitivity to alternative cost conventions.
@@ -70,3 +70,11 @@ python3 split_data.py
 python3 inspect_identifiers.py
 ```
 The split is frozen (306 development / 114 validation); regeneration refuses changed assignments. Identifier inspection scores development only and compares alias-enabled versus catalogue-only retrieval. It is separate from evaluate.py's unchanged review baseline. Evidence carries candidate codes, sources and issue tokens; it makes no confidence or auto-acceptance claim. Numeric contradiction checks are deliberately conservative and do not yet distinguish all dimensions from quantities or detect brand/material conflicts. See EVAL.md.
+
+## Lexical development experiment
+```bash
+python3 inspect_lexical.py
+```
+This reads development rows only and compares provisional similarity thresholds. Character-trigram and token cosine retrieval adds candidates for noisy names; explicit known brand, dimensions, colour, material, steel-grade, disc-type and pipe-class contradictions are checked. Original names/identifiers are preserved; normalisation applies to retrieval text only.
+
+The current experiment is unsafe for automatic acceptance: every tested threshold has negative improvement versus all-review under our cost convention. `evaluate.py` therefore remains the honest review-only baseline. Do not treat similarity as confidence. reports/lexical_development.json includes 20 proposed-failure traces for Sadad to inspect, with root-cause/fix fields intentionally blank. Full quantity/pack parsing, unfamiliar brands and broader attribute coverage remain gaps.
