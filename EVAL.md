@@ -108,3 +108,22 @@ Status: Sadad supplied his judgement in the guided review; clarification remains
 **Regression proposal (assistant-suggested, not yet implemented):** Under an explicitly confirmed identity-only contract, changing stock availability alone should not change the resolved product. If availability is a separate acceptance rule, test its review reason independently. Do not encode a per-line exception or replace the label before adjudication.
 
 **Grouping:** First candidate in the specification/label-clarification group. No assumption that other blank-labelled cases share this cause.
+
+## Personal review 02 — ACM-T-0022
+Status: Sadad supplied judgement during guided review; clarification remains unresolved. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-NITR0925 for Kanto Nitrile Glove M Blue; supplied label is blank. Wrong-auto proposal under official labels, not a live automatic decision.
+
+**Evidence:** Exact active catalogue-name match; order 100 box versus stock 900 Box. Structured unit_price is 94.66 versus list_price 99.48. The price is absent from raw_text but is present in the order record.
+
+**Sadad's judgement:** Price difference alone should not reject product identity. Escalate the discrepancy to the pricing/business owner for clarification rather than assume it changes the intended item.
+
+**Root-cause assessment:** Suspected label/business-rule ambiguity; neither a label error nor the source of the price difference has been established. A discount, timing or data error is possible but unproven.
+
+**Cost class:** Wrong-auto proposal against the official label (800 seconds-equivalent under our convention). Actual wrong-product shipment is not established by price mismatch.
+
+**Proposed response:** Preserve original labels and reported metrics; clarify price semantics and any acceptance rule. Keep pricing escalation separate from identity resolution. Do not create an arbitrary price cutoff or silently change the supplied answer.
+
+**Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, an otherwise identical item request with a different commercial price should retain its identity; any price-related review rule needs separate evidence and tests.
+
+**Grouping:** Specification/label clarification, with pricing evidence distinct from Case 1's inventory question.
