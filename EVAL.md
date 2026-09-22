@@ -50,3 +50,17 @@ Keep original labels for primary metrics; separate adjudicated sensitivity analy
 
 ## Regression gates
 TODO: numeric thresholds based on baseline; zero tenant escapes, deterministic/schema checks, precision/coverage/cost guards, <=250 ms p95, versioned fixtures and benchmark refresh policy.
+
+## Identifier evidence checkpoint (development only)
+Commands: `python3 split_data.py`; `python3 inspect_identifiers.py`. Saved output: reports/identifier_development.json, including data/split/source hashes. All 17 tests pass.
+
+A frozen deterministic grouped allocation has 306 development lines and 114 validation lines. Connected components link same tenant + supplied nonblank target, normalised text, customer-scoped buyer SKU, or barcode. Group SHA-256 modulo 4 assigns validation. This uses labels only to allocate item-disjoint groups, never as matcher input. The catalogues remain available to both partitions. It is not stratified and does not guarantee grouping every fuzzy near-duplicate. Normalising punctuation may over-group; small validation/lane populations will limit calibration. No identifier performance results were measured on validation; prior all-review full-train reporting was a no-tuning baseline.
+
+| Retrieval-only result | Aliases available | No alias history |
+|---|---:|---:|
+| Development lines | 306 | 306 |
+| Lines with eligible candidates | 27 | 9 |
+| Lines with supplied target retrieved | 27 | 9 |
+| Unique candidate with no detected issue | 15 | 8 |
+
+These are not auto precision/coverage or proof of calibration. The evidence component is not yet wired to an acceptance policy. Multiple source targets, weak alias metadata, invalid/expired mappings, unknown identifiers and numeric inconsistencies are flagged. Metadata/conflict counts can overlap. Remaining work includes brand/material checks, quantity parsing, lexical retrieval, and confidence/policy evaluation. No final predictions generated.

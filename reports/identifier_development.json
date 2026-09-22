@@ -1,0 +1,30 @@
+{
+  "scope": "development only; retrieval evidence, no autos or confidence claims",
+  "train_sha256": "8e4e983045926d01accac152d5df62c3af9d6726516999b4ef80e90dee370313",
+  "split_sha256": "e8d84837c11ef4e50f55a73a8788dea7be742766baa71f1cb5c5ee4c60a288ad",
+  "source_sha256": {
+    "inspect_identifiers.py": "ff773a600f686320719192252fb40c584059fb6d068cb62378e58b156283442c",
+    "split_data.py": "dffb4d261c3cc62941586d87c7b70af2580c31a91133cc5086c3f4146df97cdf",
+    "matcher/data.py": "3d053a8d7d933d8d1d4559b19bdbe43e3859734d9e95ba5c08a8e631d3182a7b",
+    "matcher/identifiers.py": "7e5a8208bdc662a00dada32cc2d62ee21ec668be5a7e949ecfc12333c6134fa6"
+  },
+  "results": {
+    "mature": {
+      "lines": 306,
+      "with_candidates": 27,
+      "target_retrieved": 27,
+      "unique_without_detected_issue": 15,
+      "untrusted_alias_metadata": 38,
+      "ineligible_identifier_target": 27,
+      "identifier_conflict": 1
+    },
+    "cold_start": {
+      "lines": 306,
+      "with_candidates": 9,
+      "target_retrieved": 9,
+      "unique_without_detected_issue": 8,
+      "unresolved_buyer_sku": 45,
+      "identifier_conflict": 1
+    }
+  }
+}

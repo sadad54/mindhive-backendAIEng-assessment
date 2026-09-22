@@ -106,3 +106,6 @@ No invented metrics or hand-written holdout answers. Never claim AI-prepared ana
 
 ## Checkpoint — runnable review baseline
 Delivered pinned source fixtures/manifest, audit, tenant-scoped loader, label-free input type, output safety validation, review-only matching, overall/tenant/noise-proxy evaluation and nine passing tests. reports/ contains actual baseline/audit output. Not delivered: retrieval, calibrated confidence, selected operating point/curve, mature/cold-start distinction, final predictions or personal error analysis. Next milestone: fix validation grouping, then exact identifier retrieval with explicit conflicts and focused regression tests.
+
+## Checkpoint — approved fixtures and identifier evidence
+Original fixtures now included unchanged with explicit publication permission. Frozen split: 306 development / 114 validation. Identifier evidence retrieval implemented and tested separately from acceptance; 17 tests pass. Development report compares aliases versus cold start. Next: complete attribute conflict checks and lexical candidate generation, then measure confidence/acceptance. Actual auto matching, threshold curve and final calibration remain incomplete.

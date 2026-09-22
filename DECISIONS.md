@@ -36,3 +36,17 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** All-review comparator, label-free input type, tenant/eligibility output validation and tests with mixed synthetic decisions.
 **Evidence:** reports/baseline_review.json: 420 reviews, zero coverage, undefined auto precision, utility -16,800. Nine tests include cross-tenant rejection and independently calculated mixed-outcome utility.
 **Reversal trigger:** Keep baseline for comparison even after real matching exists; extend metrics when measured use cases need them. It is not an acceptance policy for final delivery.
+
+## D-06 — Freeze connected groups before identifier experiments
+**Context:** Random rows can put repeated target products, descriptions and aliases on both sides of validation.
+**Options:** Random row split; customer-only split; connected groups using target/text/identifier relations.
+**Chose:** Fixed hash allocation of connected groups, 306 development and 114 validation lines. Do not reshuffle to improve scores.
+**Evidence:** docs/TRAIN_SPLIT.json; transitive grouping and order-invariance test. No identifier validation performance consulted.
+**Reversal trigger:** Demonstrated grouping defect or new data; version the split explicitly and disclose lost comparability. This split does not capture every fuzzy near-duplicate.
+
+## D-07 — Measure identifier retrieval before estimating acceptance confidence
+**Context:** Exact identifiers may disagree or reference disabled products; alias confidence metadata is not output calibration.
+**Options:** Assign arbitrary high confidence and auto-match; measure candidates/issues independently first.
+**Chose:** Separate Evidence object with codes, sources and issues; retain review baseline pending full arbitration/calibration.
+**Evidence:** Development-only report finds targets for 27 lines with aliases versus 9 cold-start; 17 tests pass. Numeric checks remain incomplete; no automatic precision claimed.
+**Reversal trigger:** Sufficient conflict checks and labelled evaluation support a documented confidence mapping and acceptance policy.

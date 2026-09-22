@@ -1,6 +1,6 @@
 # Mindhive backend assessment
 
-Status: Task 2/3 foundation delivered: pinned inputs, tenant-scoped catalogue loading, validated result contract, review-only baseline and measured evaluation harness. Actual matching, calibration, final evaluation, report rewrite, sync fixes and holdout predictions remain unfinished.
+Status: Task 2/3 foundation delivered: pinned inputs, tenant-scoped catalogue loading, validated result contract, review-only baseline and measured evaluation harness. Identifier evidence retrieval and a frozen grouped split are also delivered; automatic acceptance, calibration, final evaluation, report rewrite, sync fixes and holdout predictions remain unfinished.
 
 ## Assessment source
 [Mindhive brief](https://github.com/mindhiveasia/2026-backend-engineer-assessment/blob/e7ab5fd523f1db783eec517214ac6e75d33f6d5d/README.md), version 2026.1.
@@ -28,7 +28,7 @@ python3 -m unittest discover -s tests -v
 python3 evaluate.py --repeat 5 --output reports/baseline_review.json
 ```
 
-The evaluation currently sends every labelled line for review. It provides a reproducible comparison point, not a completed matcher. It prints overall, tenant and overlapping input-noise-proxy metrics; `null` means a metric is undefined. Nine tests protect metric arithmetic, tenant/eligibility checks, label separation, leading zeros, determinism through the evaluator, and p95 calculation. Local input data and starter code were imported byte-for-byte at the pinned revision; `docs/INPUT_MANIFEST.json` records their hashes. `audit_data.py` intentionally verifies original fixtures, so later authorised starter changes require an explicit provenance/audit policy update, not silently replacing the original hashes.
+The evaluation currently sends every labelled line for review. It provides a reproducible comparison point, not a completed matcher. It prints overall, tenant and overlapping input-noise-proxy metrics; `null` means a metric is undefined. Seventeen tests protect metric arithmetic, tenant/eligibility checks, label separation, leading zeros, determinism through the evaluator, and p95 calculation. Local input data and starter code were imported byte-for-byte at the pinned revision; `docs/INPUT_MANIFEST.json` records their hashes. `audit_data.py` intentionally verifies original fixtures, so later authorised starter changes require an explicit provenance/audit policy update, not silently replacing the original hashes.
 
 Saved reports contain actual measurements and environment/code/data hashes. The p95 currently measures only review-only overhead on the execution host; it does not establish the future matcher's laptop performance. Holdout bytes are preserved but rows have not been inspected or used for tuning. No `predictions.csv` is generated yet.
 
@@ -42,7 +42,7 @@ Saved reports contain actual measurements and environment/code/data hashes. The 
 | PERF.md | Requirements outline; no benchmarks yet |
 | SYNC.md | Requirements outline; no fixes/tests yet |
 | SCALE.md | Requirements outline; final analysis depends on measurements |
-| Source and tests | Review baseline and evaluator; nine tests pass |
+| Source and tests | Review baseline and evaluator; 17 tests pass |
 
 ## Assumptions and questions
 - Cost convention: U = 20C - 800W - 40A (correct autos, wrong autos, abstentions). This is our explicit interpretation, not a published grader formula. Record raw counts and sensitivity to alternative cost conventions.
@@ -63,3 +63,10 @@ Work directly on main as requested. Commit each coherent, verified milestone wit
 
 ## Fixture provenance
 The user explicitly approved publishing the original data and starter files on 2026-09-22. All 13 files match their pinned original Git blob hashes, including the compressed reference. prepare_inputs.py is an optional checksum-verified recovery tool, not a required setup step.
+
+## Identifier retrieval checkpoint
+```bash
+python3 split_data.py
+python3 inspect_identifiers.py
+```
+The split is frozen (306 development / 114 validation); regeneration refuses changed assignments. Identifier inspection scores development only and compares alias-enabled versus catalogue-only retrieval. It is separate from evaluate.py's unchanged review baseline. Evidence carries candidate codes, sources and issue tokens; it makes no confidence or auto-acceptance claim. Numeric contradiction checks are deliberately conservative and do not yet distinguish all dimensions from quantities or detect brand/material conflicts. See EVAL.md.
