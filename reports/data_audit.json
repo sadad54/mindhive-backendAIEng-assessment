@@ -1,0 +1,32 @@
+{
+  "source_revision": "e7ab5fd523f1db783eec517214ac6e75d33f6d5d",
+  "verified_imported_files": 13,
+  "catalogues": {
+    "acme": {
+      "rows": 1148,
+      "disabled": 23,
+      "duplicate_visible_name_groups": 26
+    },
+    "nordic": {
+      "rows": 524,
+      "disabled": 15,
+      "duplicate_visible_name_groups": 18
+    }
+  },
+  "train": {
+    "rows": 420,
+    "blank_labels": 125,
+    "per_tenant": {
+      "acme": 260,
+      "nordic": 160
+    }
+  },
+  "aliases": {
+    "rows": 776,
+    "multiple_target_keys_without_date_filter": 26,
+    "with_end_date_not_necessarily_expired": 26,
+    "inferred_source": 176,
+    "confidence_below_one": 349
+  },
+  "holdout": "bytes verified only; no rows parsed or tuned against"
+}

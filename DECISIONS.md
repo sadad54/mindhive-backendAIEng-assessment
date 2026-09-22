@@ -29,3 +29,10 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** U=20C-800W-40A, provisional >=98% observed auto precision and zero tenant escapes; final policy pending validation.
 **Evidence:** Brief §§1 and 5.4; algebra in DESIGN.md. The 98% goal is our proposal, not a measured result or mandated threshold.
 **Reversal trigger:** Business clarification changes cost convention or evaluation demonstrates a different defensible operating point; record any change and uncertainty.
+
+## D-05 — Establish an all-review comparator and validate outputs before scoring
+**Context:** Matcher changes need a measurable comparison; zero automatic errors can hide zero useful work.
+**Options:** Begin with an unmeasured fuzzy matcher; return fake high precision for no answers; establish a review-only baseline with honest empty-denominator metrics.
+**Chose:** All-review comparator, label-free input type, tenant/eligibility output validation and tests with mixed synthetic decisions.
+**Evidence:** reports/baseline_review.json: 420 reviews, zero coverage, undefined auto precision, utility -16,800. Nine tests include cross-tenant rejection and independently calculated mixed-outcome utility.
+**Reversal trigger:** Keep baseline for comparison even after real matching exists; extend metrics when measured use cases need them. It is not an acceptance policy for final delivery.

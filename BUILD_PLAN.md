@@ -1,6 +1,6 @@
 # Build plan and requirement gates
 
-Status: planning baseline, 22 September 2026. Task 1 first, then bounded implementation milestones. Rebase timeboxes against actual remaining deadline; these are effort budgets, not assertions of remaining time.
+Status: Task 1 initial draft and Task 2/3 review-baseline foundation delivered, 22 September 2026. Task 1 first, then bounded implementation milestones. Rebase timeboxes against actual remaining deadline; these are effort budgets, not assertions of remaining time.
 
 ## Priority analysis
 Task 2 (25%) has the largest individual weight, but Task 1 (20%) must precede code and Task 3 (20%) measures whether it works. Therefore build Task 1 -> Task 3 harness foundation -> Task 2/3 increments. Never finish a complex matcher before implementing evaluation.
@@ -41,7 +41,7 @@ Initial design is drafted, not final or empirically validated.
 - [ ] If embeddings added: pin model, package build step, measure marginal gain and offline feasibility.
 
 ### Task 3 — EVAL.md (20%)
-- [ ] One reproducible command on labelled data.
+- [x] One reproducible command on labelled data (review baseline only).
 - [ ] Per-tenant and defined/justified noise-class counts and metrics.
 - [ ] Precision/coverage curve, chosen point, cost model, accuracy comparison.
 - [ ] Calibration, candidate recall and abstention quality; denominators explicit.
@@ -103,3 +103,6 @@ Update associated documents in the code commit. Use main, no force pushes. Save 
 
 ## Non-negotiable honesty
 No invented metrics or hand-written holdout answers. Never claim AI-prepared analysis as personal inspection. Log 8–15 genuine decisions as they occur, not 15 placeholders. At each checkpoint Sadad should explain one decision and its counterexample. Preserve final two hours; cut embeddings, frameworks and optional features first.
+
+## Checkpoint — runnable review baseline
+Delivered pinned source fixtures/manifest, audit, tenant-scoped loader, label-free input type, output safety validation, review-only matching, overall/tenant/noise-proxy evaluation and nine passing tests. reports/ contains actual baseline/audit output. Not delivered: retrieval, calibrated confidence, selected operating point/curve, mature/cold-start distinction, final predictions or personal error analysis. Next milestone: fix validation grouping, then exact identifier retrieval with explicit conflicts and focused regression tests.
