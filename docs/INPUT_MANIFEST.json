@@ -1,0 +1,58 @@
+{
+  "source_repository": "mindhiveasia/2026-backend-engineer-assessment",
+  "source_revision": "e7ab5fd523f1db783eec517214ac6e75d33f6d5d",
+  "files": {
+    "data/catalogue_acme.csv": {
+      "git_blob_sha": "659d04ab2339bc34b39819f50e6944045b712070",
+      "sha256": "b895ac21aca526e7d91a3a3884a36812f882f6c57ac729a0f55ea9ad5df467ae"
+    },
+    "data/catalogue_nordic.csv": {
+      "git_blob_sha": "5cb05ce5e915f30dc9af8c38523bf92863c37738",
+      "sha256": "7543bd3f4f0ad3321b141780bbcf4d21b1fe6956710b6e29ad709459e93f1941"
+    },
+    "data/customer_sku_map.csv": {
+      "git_blob_sha": "7600a205ab42fab4202cac7940dbbd4c6f16eb7c",
+      "sha256": "5d71b025cc77d296065c7fba02b9925efe751618f9a7c7ce74cc59a61793fa37"
+    },
+    "data/uom_reference.csv": {
+      "git_blob_sha": "31087eebdb2748c49a9070244dd72702c02ee6d6",
+      "sha256": "b785fa69d1be7b1dcfb271261579c11958ed363aadb795adcaab3aecc39ea43c"
+    },
+    "data/order_lines_train.csv": {
+      "git_blob_sha": "904958d93384fa029c0328f40d3799be792032aa",
+      "sha256": "8e4e983045926d01accac152d5df62c3af9d6726516999b4ef80e90dee370313"
+    },
+    "data/order_lines_holdout.csv": {
+      "git_blob_sha": "f7a6a7520867e92d671368a75e782151911c4fce",
+      "sha256": "194fc0907533fcf8d03503b7927b1b5512387b3d9a1597b6352025a11ecbbe72"
+    },
+    "data/report_reference.json.gz": {
+      "git_blob_sha": "5d59185ee83109a1a28df42f78e1789ebf16b7b5",
+      "sha256": "f5ff44caf15d2c5637e03a39d9e6df35b36e80350547a7603b53fbb1fdd2d16f"
+    },
+    "starter/make_perf_db.py": {
+      "git_blob_sha": "4337d8191ecec9fc78d392886cc74f8dd6dc0529",
+      "sha256": "42c354cf3a3dc799a5e8457066b17351126c5d19a3252f60877345b4d9def649"
+    },
+    "starter/report_query.sql": {
+      "git_blob_sha": "0d780efc82c5fb2be98dcb9e2ce006bc40f868da",
+      "sha256": "b75f07c738a73bc1c55971665256ef02f0da9225abf8bd22d14eaf6f68464600"
+    },
+    "starter/bench_report.py": {
+      "git_blob_sha": "f156b8561afc98f3ffc36ee9657db46177065734",
+      "sha256": "a99c4dd348e72d7ee4a9c16e5ad6ec399752ec6b2f1f635e4d313efa6a7e3f0f"
+    },
+    "starter/sync/fake_erp.py": {
+      "git_blob_sha": "e5e1a0597e6f95d2e44fb9db1a5cbf1d119acd60",
+      "sha256": "23c51c03ecf951aad649215d5abd1aec159df4540dd68632280b52a438fec4e6"
+    },
+    "starter/sync/sync_adapter.py": {
+      "git_blob_sha": "2d7737558023d0020a241183ad360910efc01bb2",
+      "sha256": "651db7e94821289b01a0c92e729fd7a491e560b7d148f97365342e384bfe6a39"
+    },
+    "starter/sync/run_sync.py": {
+      "git_blob_sha": "02ad85e924233707edac4e9af4b8f8adfae5d6db",
+      "sha256": "a45897c26270a47cc1d57d7c1a987d9fb479bfdb7a449e23f2e6728bad906168"
+    }
+  }
+}
