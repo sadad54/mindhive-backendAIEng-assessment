@@ -239,3 +239,15 @@ Status: Sadad confirmed grouping with Case 4 after discussing the distinction be
 **Proposed fix:** Reuse Case 4's product-family/pack-conversion ambiguity check; review unless explicit pack or reliable identifier evidence selects a variant. Never infer Bulk from a large order or invent a quantity threshold without a supplied business contract. Stock is a separate issue.
 **Regression proposal (assistant-suggested):** Fifty cartons without variant evidence must review with both candidates. Explicit standard/bulk pack evidence selects the corresponding conversion; changing carton count alone must not silently switch item code.
 **Grouping:** Same missing pack-variant capability as Case 4. Original label retained.
+
+## Personal review 10 — ACM-T-0142
+Status: Sadad supplied judgement in guided review; unit and pricing questions remain unresolved. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-PVCP1037 for Kanto PVC Pipe 25mm Class C; supplied label is blank.
+**Evidence:** Exact active catalogue-name match; requested 100 pcs, catalogue stock unit Length with only Length=1 listed. Available stock is 150 lengths; order/list prices are 166.02/156.72. No barcode or buyer SKU disambiguates further.
+**Sadad's judgement:** Retain the proposed identity and clarify whether 100 pcs means 100 full stock lengths. He also wants identity clarification because of the price discrepancy.
+**Root-cause assessment:** Unresolved pieces-to-stock-length convention and pricing/label question. Price motivates verification but does not alone establish a wrong item or explain the blank label; no asserted cause such as discount, tax or stale pricing is proven.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent), with possible quantity interpretation error. Stock sufficiency cannot be concluded until units agree.
+**Proposed response:** Confirm the intended item and whether each piece is a full stock length; separately confirm the quoted price basis. Do not change the item code or invent a conversion solely to reconcile prices. Preserve official labels pending adjudication.
+**Regression proposal (assistant-suggested):** A confirmed scoped pcs=Length convention allows 100 stock lengths; a request for cut sections requires specified lengths/conversion. A price-only change should not silently substitute another product.
+**Grouping:** Supported identity with unit/pricing clarification, related to Cases 3, 5 and 7, not the pack-sibling ambiguity of Cases 4 and 9.
