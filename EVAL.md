@@ -300,3 +300,15 @@ Status: Sadad supplied judgement in guided review. AI organised evidence and edi
 **Proposed response:** Keep in review; ask which finish/material is required, including the stainless grade if relevant. If HDG is selected, clarify 6 versus 144 pieces per carton. Inventory may inform fulfilment options after identification, but must not silently substitute a different specification. Original labels retained.
 **Regression proposal (assistant-suggested):** An M8x50 request without finish/material must review when these siblings are eligible. Changing inventory alone must not resolve the ambiguity. Explicit finish/material narrows the family; selecting HDG alone must still preserve the pack ambiguity.
 **Grouping:** Missing specification capability, related to Case 6; residual HDG pack ambiguity relates to Cases 4 and 9.
+
+## Personal review 15 — ACM-T-0177
+Status: Sadad supplied judgement in guided review; quantity-unit clarification remains open. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-SELF0464 for Vermont Self Drilling Screw #10 x 1-1/2" Stainless 410; supplied label is blank.
+**Evidence:** Active exact-name match after removing the leading bullet; brand, size and grade are explicit. Request is 3 unit; catalogue stock unit Packet, carton conversion 50 packets, displayed stock 40 packets. No pieces-per-packet conversion, order price, buyer SKU or order barcode is supplied.
+**Sadad's judgement:** Retain the proposed identity while clarifying what 3 unit means; ask whether the customer intended cartons or packets.
+**Root-cause assessment:** Supported product identity with unresolved generic-unit semantics. The missing unit convention does not independently establish an identity error or explain why the supplied label is blank.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent), with possible quantity/fulfilment error. Three packets and three cartons represent 3 and 150 stock packets respectively.
+**Proposed response:** Confirm packets versus cartons before converting or assessing stock sufficiency. If individual screws were intended, obtain a pieces-per-packet conversion rather than deriving it from the carton factor. Clarify whether unresolved quantity is intended to block item-code resolution; preserve official labels and metrics pending adjudication.
+**Regression proposal (assistant-suggested):** Without an approved scoped convention, unit remains unresolved. Explicit Packet and Carton convert three to 3 and 150 packets respectively; no silent mapping to individual screws. Keep supported identity distinct from quantity and fulfilment status.
+**Grouping:** Supported identity with quantity-unit clarification, related to Cases 3 and 8. No omitted grade in this case, unlike Case 6.
