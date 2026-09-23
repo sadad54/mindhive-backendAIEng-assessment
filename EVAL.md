@@ -336,3 +336,15 @@ Status: Sadad supplied judgement in guided review; label/business-rule clarifica
 **Proposed response:** Confirm the pcs/Nos convention and ask why this line expects abstention despite matching identity attributes and apparently compatible units. Do not invent an identity mismatch to fit the label or silently relabel it. Preserve official labels and primary metrics; record any adjudication separately.
 **Regression proposal (assistant-suggested):** Under a confirmed pcs=Nos convention, 50 pcs means 50 individual items while 50 cartons means 500. Preserve the unit distinction and product identity; stock-only changes affect fulfilment separately under an identity-only contract.
 **Grouping:** Label/business-rule clarification with apparently compatible unit terminology; related to Case 3, but more specific than generic unit wording.
+
+## Personal review 18 — ACM-T-0202
+Status: Sadad explicitly applied Case 13's rule in guided review. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes standard ACM-ANGL0411 for Hitex Angle Grinder Disc 4.5" Flap, quantity 12 with blank UOM; supplied label is blank.
+**Evidence:** Active standard ACM-ANGL0411 and Bulk ACM-ANGL0411B use Packet as stock unit, with carton factors 10 and 144 packets respectively. Both display stock 150 packets. No order price, buyer SKU or order barcode resolves the variant.
+**Sadad's judgement:** Apply Case 13's rule: keep in review until both quantity unit and product variant are established.
+**Root cause:** Same combined missing-unit and pack-sibling ambiguity as Case 13. Changing the requested quantity from five to twelve supplies no new evidence about unit or variant.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent), with possible wrong-pack/quantity consequences. Twelve standard cartons represent 120 packets; twelve Bulk cartons represent 1,728 packets.
+**Proposed response:** Ask whether twelve means packets or cartons and which product variant is intended. If cartons, confirm 10 versus 144 packets per carton. Do not infer Bulk from order size or choose the variant whose stock happens to cover the request. Preserve official labels.
+**Regression proposal (assistant-suggested):** Reuse Case 13's guard across quantities five and twelve: quantity-only changes must not resolve missing unit or variant evidence. Confirming only Carton still leaves the pack ambiguous; require consistent distinguishing evidence or an approved scoped business convention.
+**Grouping:** Same capability gap as Case 13 and the pack ambiguity in Cases 4 and 9; this is another affected line, not a separate root cause.
