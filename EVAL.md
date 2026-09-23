@@ -312,3 +312,15 @@ Status: Sadad supplied judgement in guided review; quantity-unit clarification r
 **Proposed response:** Confirm packets versus cartons before converting or assessing stock sufficiency. If individual screws were intended, obtain a pieces-per-packet conversion rather than deriving it from the carton factor. Clarify whether unresolved quantity is intended to block item-code resolution; preserve official labels and metrics pending adjudication.
 **Regression proposal (assistant-suggested):** Without an approved scoped convention, unit remains unresolved. Explicit Packet and Carton convert three to 3 and 150 packets respectively; no silent mapping to individual screws. Keep supported identity distinct from quantity and fulfilment status.
 **Grouping:** Supported identity with quantity-unit clarification, related to Cases 3 and 8. No omitted grade in this case, unlike Case 6.
+
+## Personal review 16 — ACM-T-0182
+Status: Sadad supplied judgement in guided review; unit and label clarification remain open. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-PVCP0541 for Stallion PVC Pipe 15mm Class E; supplied label is blank.
+**Evidence:** Exact active catalogue-name match; request quantity 2 with blank UOM. Stock unit Length, only listed conversion Length=1, displayed stock 900 lengths. Structured order/list prices are 204.45/184.98. No buyer SKU or order barcode supplies further evidence.
+**Sadad's judgement:** Retain the proposed identity and clarify the quantity unit. The price difference does not justify changing the product match because the description matches exactly.
+**Root-cause assessment:** Supported identity with missing quantity-unit semantics and a separate pricing/label question. A single listed UOM does not prove the intended unit; neither the price difference nor the missing unit establishes that a different product was intended. The reason for the blank annotation remains unconfirmed.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent), with potential quantity interpretation error; actual wrong-product shipment is not established.
+**Proposed response:** Confirm whether two full stock lengths are intended. Clarify price basis separately without substituting a different item to reconcile prices. Ask whether unresolved quantity or a defined pricing rule explains expected abstention. Preserve original labels and primary metrics pending adjudication.
+**Regression proposal (assistant-suggested):** Missing UOM remains unresolved without a confirmed scoped convention; explicit Length means two stock lengths, with no inferred metres or cut-section conversion. Under a confirmed identity-only contract, price-only changes must not silently change the product code.
+**Grouping:** Supported identity with unit/pricing clarification, related to Cases 5 and 10; no observed product-attribute contradiction.
