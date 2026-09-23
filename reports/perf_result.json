@@ -1,0 +1,22 @@
+{
+  "times_s": [
+    3.6752284100002726,
+    3.353567483000006,
+    3.3180561089998264,
+    3.2511358789997757,
+    3.3863823100000445
+  ],
+  "median_s": 3.353567483000006,
+  "within_budget": true,
+  "rows": 8666,
+  "strict_reference_equality": true,
+  "max_reference_float_delta": 0.0,
+  "strict_original_slice_equality": true,
+  "original_slice_within_1e_12": true,
+  "reference_rounded_check": true,
+  "p95_oracle_all_rows": true,
+  "sqlite": "3.53.1",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "source_sha256": "a3839c6da3e11b29c359149f8891d10c05f452652bab8c4fde98036d835687be"
+}

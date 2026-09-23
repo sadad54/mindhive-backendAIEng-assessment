@@ -85,3 +85,17 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** SQLite transactional records/cursor/outbox/conflicts, overlapping adaptive pulls with a hard cap, stable operation keys and original CAS base across retries. Preserve conflicts for explicit resolution.
 **Evidence:** Fifteen focused sync tests include original-adapter counterexamples, hard process death, key-cache expiry and partial-batch restart. Vendor code is unchanged; advertised TTL is simulated by clearing its non-expiring cache.
 **Reversal trigger:** Vendor snapshot pagination, durable operation lookup and conditional create remove current caps/ambiguities; horizontal scale requires a server database and worker ownership. No claim of global exactly-once or deletion detection.
+
+## D-13 — Replace correlated report scans with one-pass summaries
+**Context:** Bounded original-query slices showed high fixed setup cost and repeated tenant/channel/day scans; repeat-items was the largest isolated cost but substantial work remained without it.
+**Options:** Add many expression/covering indexes; optimise only EXISTS; aggregate once in a read snapshot with per-day sets and latency arrays.
+**Chose:** Standard-library Python/SQLite bounded passes, item-set intersections, stable score summation and exact nearest-rank p95. Preserve order-day/event-day populations and row order; no permanent indexes/materialised stale views.
+**Evidence:** Repeated slices fit output-group scaling better than input-row scaling; 12-group ablation reduces 10.261 s to 5.142 s without repeat-items. Full rewrite matches all 8,666 reference rows exactly and runs in approximately 3.35 seconds, including p95 checked independently on every output group.
+**Reversal trigger:** At 50x volume the full scan and memory footprint fail the budget; move to incremental summaries with an explicit freshness/quantile contract, not unmeasured index proliferation.
+
+## D-14 — Ship the frozen policy with disclosed limits rather than tune holdout
+**Context:** Validation is small; exact-text label concerns remain unresolved and more language/pack features could consume the remaining time without reliable new evaluation.
+**Options:** Add semantics/embeddings and retune on validation; keep the measured policy and complete report/sync/reproduction work.
+**Chose:** Preserve the pre-validation policy, generate holdout once deterministically, publish explicit regression gates and prioritise complete runnable task evidence. No automatic alias learning or production deployment.
+**Evidence:** 26/26 validation autos at 22.81% coverage; 300 holdout rows generated with no known accuracy. Report and sync now have separate correctness/performance evidence; all 20 candidate judgements are recorded.
+**Reversal trigger:** A new untouched evaluation set or adjudicated production outcomes justify changing acceptance. Laptop verification and Sadad's live-code defence remain necessary personal work.

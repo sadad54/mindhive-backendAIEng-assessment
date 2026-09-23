@@ -1,0 +1,146 @@
+[
+  {
+    "removed": "none",
+    "runs": [
+      {
+        "seconds": 10.598954448000313,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.923734049000359,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 10.261344248500336
+  },
+  {
+    "removed": "lines_accepted",
+    "runs": [
+      {
+        "seconds": 8.612908755000262,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 8.98033321999992,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 8.796620987500091
+  },
+  {
+    "removed": "candidates_considered",
+    "runs": [
+      {
+        "seconds": 9.60928410500037,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.404118151999683,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 9.506701128500026
+  },
+  {
+    "removed": "avg_accept_score",
+    "runs": [
+      {
+        "seconds": 9.163315734000207,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 8.372071303000212,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 8.76769351850021
+  },
+  {
+    "removed": "max_latency_ms",
+    "runs": [
+      {
+        "seconds": 8.593820117000178,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.102168707000146,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 8.847994412000162
+  },
+  {
+    "removed": "avg_latency_ms",
+    "runs": [
+      {
+        "seconds": 8.19162377199973,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.39169519799998,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 8.791659484999855
+  },
+  {
+    "removed": "distinct_customers",
+    "runs": [
+      {
+        "seconds": 9.439383155000087,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.57628062799995,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 9.507831891500018
+  },
+  {
+    "removed": "repeat_items_prev_day",
+    "runs": [
+      {
+        "seconds": 4.7640825670000595,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 5.520218025999839,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 5.142150296499949
+  },
+  {
+    "removed": "accepted_disabled",
+    "runs": [
+      {
+        "seconds": 8.376506505999714,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.071604140999625,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 8.72405532349967
+  }
+]

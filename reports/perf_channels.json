@@ -1,0 +1,43 @@
+[
+  {
+    "tenant": "T001",
+    "day": "2026-05-01",
+    "channels": [
+      "email_pdf"
+    ],
+    "runs": [
+      {
+        "seconds": 4.977184608999778,
+        "groups": 1,
+        "complete": true
+      },
+      {
+        "seconds": 4.921385763000217,
+        "groups": 1,
+        "complete": true
+      }
+    ],
+    "median_s": 4.949285185999997
+  },
+  {
+    "tenant": "T001",
+    "day": "2026-05-01",
+    "channels": [
+      "email_pdf",
+      "voice_note"
+    ],
+    "runs": [
+      {
+        "seconds": 6.069810985000004,
+        "groups": 2,
+        "complete": true
+      },
+      {
+        "seconds": 6.254234993999944,
+        "groups": 2,
+        "complete": true
+      }
+    ],
+    "median_s": 6.162022989499974
+  }
+]

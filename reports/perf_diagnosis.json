@@ -1,0 +1,263 @@
+{
+  "target_seconds": 10,
+  "timeout_per_slice": 30,
+  "slices": [
+    {
+      "seconds": 5.135275350000029,
+      "groups": 2,
+      "complete": true,
+      "tenants": [
+        "T040"
+      ],
+      "days": 1,
+      "window_lines": 4
+    },
+    {
+      "seconds": 7.182388322999941,
+      "groups": 5,
+      "complete": true,
+      "tenants": [
+        "T040"
+      ],
+      "days": 2,
+      "window_lines": 9
+    },
+    {
+      "seconds": 8.178920114999983,
+      "groups": 4,
+      "complete": true,
+      "tenants": [
+        "T001"
+      ],
+      "days": 1,
+      "window_lines": 255
+    },
+    {
+      "seconds": 7.551958710000008,
+      "groups": 6,
+      "complete": true,
+      "tenants": [
+        "T001",
+        "T040"
+      ],
+      "days": 1,
+      "window_lines": 259
+    }
+  ],
+  "ablations": [
+    {
+      "seconds": 4.851976443000012,
+      "groups": 2,
+      "complete": true,
+      "removed": "lines_accepted"
+    },
+    {
+      "seconds": 5.00759356399999,
+      "groups": 2,
+      "complete": true,
+      "removed": "candidates_considered"
+    },
+    {
+      "seconds": 4.892510640999944,
+      "groups": 2,
+      "complete": true,
+      "removed": "avg_accept_score"
+    },
+    {
+      "seconds": 5.71976230700011,
+      "groups": 2,
+      "complete": true,
+      "removed": "max_latency_ms"
+    },
+    {
+      "seconds": 4.974894607999886,
+      "groups": 2,
+      "complete": true,
+      "removed": "avg_latency_ms"
+    },
+    {
+      "seconds": 5.3615362059999825,
+      "groups": 2,
+      "complete": true,
+      "removed": "distinct_customers"
+    },
+    {
+      "seconds": 0.7470651789999465,
+      "groups": 2,
+      "complete": true,
+      "removed": "repeat_items_prev_day"
+    },
+    {
+      "seconds": 6.474757646000171,
+      "groups": 2,
+      "complete": true,
+      "removed": "accepted_disabled"
+    }
+  ],
+  "full_groups": 8666,
+  "events": 1119139,
+  "query_plan": [
+    [
+      9,
+      0,
+      47,
+      "SEARCH t USING INDEX sqlite_autoindex_tenant_1 (tenant_id=?)"
+    ],
+    [
+      14,
+      0,
+      216,
+      "SCAN ol"
+    ],
+    [
+      26,
+      0,
+      0,
+      "USE TEMP B-TREE FOR GROUP BY"
+    ],
+    [
+      72,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 1"
+    ],
+    [
+      82,
+      72,
+      224,
+      "SCAN me2 USING INDEX idx_match_event_line"
+    ],
+    [
+      89,
+      72,
+      46,
+      "SEARCH ol2 USING INDEX sqlite_autoindex_order_line_1 (line_id=?)"
+    ],
+    [
+      112,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 2"
+    ],
+    [
+      118,
+      112,
+      216,
+      "SCAN ol3"
+    ],
+    [
+      129,
+      112,
+      54,
+      "SEARCH me3 USING COVERING INDEX idx_match_event_line (line_id=?)"
+    ],
+    [
+      143,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 3"
+    ],
+    [
+      148,
+      143,
+      216,
+      "SCAN me4"
+    ],
+    [
+      169,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 4"
+    ],
+    [
+      174,
+      169,
+      216,
+      "SEARCH me5"
+    ],
+    [
+      193,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 5"
+    ],
+    [
+      198,
+      193,
+      216,
+      "SCAN me6"
+    ],
+    [
+      216,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 6"
+    ],
+    [
+      221,
+      216,
+      0,
+      "USE TEMP B-TREE FOR count(DISTINCT)"
+    ],
+    [
+      223,
+      216,
+      216,
+      "SCAN ol4"
+    ],
+    [
+      246,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 8"
+    ],
+    [
+      251,
+      246,
+      0,
+      "USE TEMP B-TREE FOR count(DISTINCT)"
+    ],
+    [
+      255,
+      246,
+      216,
+      "SCAN me8"
+    ],
+    [
+      275,
+      246,
+      53,
+      "SEARCH me9 EXISTS USING AUTOMATIC PARTIAL COVERING INDEX (tenant_id=? AND item_code=?)"
+    ],
+    [
+      300,
+      0,
+      0,
+      "CORRELATED SCALAR SUBQUERY 9"
+    ],
+    [
+      307,
+      300,
+      216,
+      "SCAN me7"
+    ],
+    [
+      318,
+      300,
+      47,
+      "SEARCH it USING INDEX sqlite_autoindex_item_1 (tenant_id=? AND item_code=?)"
+    ],
+    [
+      349,
+      0,
+      0,
+      "USE TEMP B-TREE FOR count(DISTINCT)"
+    ],
+    [
+      352,
+      0,
+      0,
+      "USE TEMP B-TREE FOR ORDER BY"
+    ]
+  ]
+}

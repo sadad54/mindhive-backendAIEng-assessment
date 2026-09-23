@@ -1,0 +1,123 @@
+[
+  {
+    "tenants": [
+      "T040"
+    ],
+    "days": 1,
+    "runs": [
+      {
+        "seconds": 5.367318105999857,
+        "groups": 2,
+        "complete": true
+      },
+      {
+        "seconds": 5.342127498999616,
+        "groups": 2,
+        "complete": true
+      }
+    ],
+    "median_s": 5.354722802499737,
+    "window_lines": 4
+  },
+  {
+    "tenants": [
+      "T040"
+    ],
+    "days": 2,
+    "runs": [
+      {
+        "seconds": 6.27389048699979,
+        "groups": 5,
+        "complete": true
+      },
+      {
+        "seconds": 6.908005024999966,
+        "groups": 5,
+        "complete": true
+      }
+    ],
+    "median_s": 6.590947755999878,
+    "window_lines": 9
+  },
+  {
+    "tenants": [
+      "T040"
+    ],
+    "days": 4,
+    "runs": [
+      {
+        "seconds": 9.739314032000038,
+        "groups": 12,
+        "complete": true
+      },
+      {
+        "seconds": 9.416477310000118,
+        "groups": 12,
+        "complete": true
+      }
+    ],
+    "median_s": 9.577895671000078,
+    "window_lines": 25
+  },
+  {
+    "tenants": [
+      "T001"
+    ],
+    "days": 1,
+    "runs": [
+      {
+        "seconds": 6.916947598999741,
+        "groups": 4,
+        "complete": true
+      },
+      {
+        "seconds": 6.802734891,
+        "groups": 4,
+        "complete": true
+      }
+    ],
+    "median_s": 6.8598412449998705,
+    "window_lines": 255
+  },
+  {
+    "tenants": [
+      "T001"
+    ],
+    "days": 2,
+    "runs": [
+      {
+        "seconds": 9.339358812000228,
+        "groups": 8,
+        "complete": true
+      },
+      {
+        "seconds": 9.158166202999837,
+        "groups": 8,
+        "complete": true
+      }
+    ],
+    "median_s": 9.248762507500032,
+    "window_lines": 516
+  },
+  {
+    "tenants": [
+      "T001",
+      "T040"
+    ],
+    "days": 1,
+    "runs": [
+      {
+        "seconds": 7.638111880999986,
+        "groups": 6,
+        "complete": true
+      },
+      {
+        "seconds": 7.549809748000371,
+        "groups": 6,
+        "complete": true
+      }
+    ],
+    "median_s": 7.5939608145001785,
+    "window_lines": 259
+  }
+]
