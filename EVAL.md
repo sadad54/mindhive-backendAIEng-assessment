@@ -227,3 +227,15 @@ Status: Sadad supplied judgement in guided review; quantity/fulfilment unresolve
 **Proposed response:** Clarify packets versus cartons before conversion; five cartons would be 50 packets under the supplied conversion, whereas five packets stays five packets. If individual screws were intended, an additional pieces-per-packet conversion would be needed. Do not derive it from carton factor or price. Keep fulfilment and price checks separate from identity and preserve official labels.
 **Regression proposal (assistant-suggested):** Missing UOM remains unresolved; explicit Packet and Carton produce 5 and 50 stock packets respectively, without changing identity where no pack sibling ambiguity exists. No implicit pieces conversion.
 **Grouping:** Supported identity with quantity/fulfilment clarification, related to Cases 1, 5 and 7.
+
+## Personal review 09 — ACM-T-0134
+Status: Sadad confirmed grouping with Case 4 after discussing the distinction between order quantity and catalogue pack variant. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes standard ACM-HEXB0675 for Tolsen Hex Bolt M8x50 HDG, qty=50, uom=ctn; supplied label is blank.
+**Evidence:** Standard ACM-HEXB0675 has 6 Pcs/carton; active Bulk ACM-HEXB0675B has 144 Pcs/carton. Both display zero stock. No order price, barcode or buyer SKU disambiguates. Fifty cartons could represent 300 or 7,200 pieces.
+**Sadad's judgement:** After clarification that Bulk denotes a separate product code rather than a quantity-based threshold, classify with Case 4's pack-variant ambiguity. Ask whether the customer intends cartons of 6 or 144 pieces.
+**Root cause:** Missing pack-sibling ambiguity safeguard. Knowing the order UOM and carton count does not determine which product's conversion applies. A high similarity/margin for the standard name does not resolve this.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent); potential 24-fold quantity difference, not a measured 24-fold financial loss.
+**Proposed fix:** Reuse Case 4's product-family/pack-conversion ambiguity check; review unless explicit pack or reliable identifier evidence selects a variant. Never infer Bulk from a large order or invent a quantity threshold without a supplied business contract. Stock is a separate issue.
+**Regression proposal (assistant-suggested):** Fifty cartons without variant evidence must review with both candidates. Explicit standard/bulk pack evidence selects the corresponding conversion; changing carton count alone must not silently switch item code.
+**Grouping:** Same missing pack-variant capability as Case 4. Original label retained.
