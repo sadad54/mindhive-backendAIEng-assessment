@@ -78,3 +78,10 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** Six explicit evidence groups, Beta(1,1) smoothing, minimum 10 examples and >=98% observed correctness plus positive expected utility to enable a group. Preserve original labels and freeze before validation. Missing-attribute/contradiction flags block acceptance.
 **Evidence:** Development counts and Wilson intervals in matcher/policy.json; identifier 15/15, high lexical 33/33, other lexical 56/56, exact lexical 55/70. Counterintuitive exact/non-exact behaviour is disclosed as a distribution risk, not explained away.
 **Reversal trigger:** Failed frozen validation or adjudicated production drift disables the policy; do not repeatedly tune on the same validation set. More data is needed for tenant-specific calibration.
+
+## D-12 — Durable outbox and conflict quarantine, never forced rebase
+**Context:** The starter loses same-second pull rows, retries with new keys and overwrites concurrent ERP edits; death can occur after remote commit.
+**Options:** Retry harder/latest timestamp wins; long-lived vendor idempotency alone; durable immutable intents plus version preconditions and reconciliation.
+**Chose:** SQLite transactional records/cursor/outbox/conflicts, overlapping adaptive pulls with a hard cap, stable operation keys and original CAS base across retries. Preserve conflicts for explicit resolution.
+**Evidence:** Fifteen focused sync tests include original-adapter counterexamples, hard process death, key-cache expiry and partial-batch restart. Vendor code is unchanged; advertised TTL is simulated by clearing its non-expiring cache.
+**Reversal trigger:** Vendor snapshot pagination, durable operation lookup and conditional create remove current caps/ambiguities; horizontal scale requires a server database and worker ownership. No claim of global exactly-once or deletion detection.
