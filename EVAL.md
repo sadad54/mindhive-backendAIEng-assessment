@@ -1,4 +1,65 @@
-# Task 3 — Evaluation
+# Task 3 — Final evaluation
+
+Status: frozen matcher, measured validation/cold-start evaluation, 20 personally discussed development failures, four label concerns, holdout inference and regression gates delivered. Historical checkpoints below are retained as evidence of decisions, not current status. AI authored code/measurement tooling and edited the case notes; Sadad supplied the 20 case judgements.
+
+## Final reproduction and operating point
+```bash
+python3 evaluate_matcher.py --repeat 2 --output reports/final_evaluation.json
+python3 predict.py
+python3 regression_check.py
+```
+No command above refits confidence. `fit_policy.py` is an explicit development-only training command; do not rerun it as a way to tune on validation. Policy was committed as 15df5bc before validation results were measured. No change to that policy followed validation. The original all-review evaluator remains available as `evaluate.py`.
+
+| Population | Lines | Correct / wrong autos | Precision | Coverage | Recall@3 | Value gained over review |
+|---|---:|---:|---:|---:|---:|---:|
+| Development, mature | 306 | 104 / 0 | 100% | 33.99% | 95.45% | 6,240 |
+| Validation, mature | 114 | 26 / 0 | 100% | 22.81% | 84.00% | 1,560 |
+| Validation, no aliases | 114 | 26 / 0 | 100% | 22.81% | 77.33% | 1,560 |
+| All train, mature (includes fitting data) | 420 | 130 / 0 | 100% | 30.95% | 92.54% | 7,800 |
+| All train, no aliases | 420 | 123 / 0 | 100% | 29.29% | 88.81% | 7,380 |
+
+Observed 26/26 validation precision has a Wilson 95% interval of approximately 87.1%–100%; it does NOT establish a population precision guarantee of 98%. The small, grouped validation set is the final assessment here, not a reusable tuning set. Lower validation candidate recall (especially Acme) remains a delivery limitation. All 39 blank-label validation lines abstained. Among 49 answerable validation abstentions, the correct target was in candidates for 37 (75.51%). Accuracy counting correct abstentions is 57.02%; alone this conceals both the 100% observed auto precision and the 77.19% non-auto workload.
+
+Mature validation by tenant: Acme 16/16 autos, 20.25% coverage, 39/51 top-three retrieval; Nordic 10/10 autos, 28.57% coverage, 24/24 retrieval. The JSON includes all counts and overlapping noise-proxy segments defined in evaluate.py. Flags are input-only: identifier presence, packaging words, dimension/weight tokens, selected Malay tokens and separators. These are reproducible observations, not asserted true noise classes; unfamiliar-brand typos and semantic omissions need better annotations before a production audit.
+
+## Calibration and threshold sensitivity
+Confidence estimates top-candidate correctness, even for review rows; no candidate means zero. Candidate scores remain retrieval similarity, not probabilities. The same Beta(1,1) procedure is used across evidence lanes; buckets are coarse and sample sizes are disclosed in policy.json. No tenant-specific calibration is claimed.
+
+| Validation group confidence | Rows | Correct top candidate | Observed frequency |
+|---|---:|---:|---:|
+| 0 (no candidate) | 25 | 0 | 0% |
+| 0.4330 (blocked) | 38 | 17 | 44.74% |
+| 0.7778 (exact lexical) | 25 | 18 | 72.00% |
+| 0.9412 (identifier) | 4 | 4 | 100% |
+| 0.9714 (high lexical) | 9 | 9 | 100% |
+| 0.9828 (other lexical) | 13 | 13 | 100% |
+
+Validation ECE=0.02375 and Brier=0.12764; low aggregate ECE does not remove uncertainty in four identifier examples. Cold-start ECE=0.05802 and Brier=0.12176. Removing aliases can improve aggregate calibration while worsening retrieval; these measure different properties.
+
+The following sensitivity curve only raises the confidence cutoff among already eligible groups. It does not override hard guards or select a new threshold from validation.
+
+| Cutoff | Validation autos | Precision | Coverage |
+|---|---:|---:|---:|
+| Frozen utility floor (~0.9268) | 26 | 100% | 22.81% |
+| 0.95 | 22 | 100% | 19.30% |
+| 0.975 | 13 | 100% | 11.40% |
+| 0.99 | 0 | Undefined | 0% |
+
+Under the stated U=20C-800W-40A convention, the selected validation policy gains 1,560 seconds-equivalent over all-review. The break-even probability at error cost 20× review is 760/820; at 3× it is 80/140. This is policy sensitivity, not permission to remove contradiction guards. A cost-only convention with zero cost for correct answers instead requires 95% at 20×; raw counts support either accounting choice.
+
+## Timing, cold start and limitations
+Mature preparation 105.10 ms; warm all-train p95 42.37 ms over 840 timed calls after a warm pass (two repeats). Validation p95 37.65 ms. Cold all-train p95 29.78 ms. All calls were checked for deterministic output. These are host measurements (Python 3.12.14), not laptop certification; repeat on the candidate's laptop. Alias removal is an ablation on known catalogues, not proof of performance on a never-seen tenant.
+
+Only active tenant-scoped candidates can reach output; labels are excluded from OrderLine. Stock, pricing and quantity fulfilment never select another identity. Unit uncertainty is documented, but the delivered matcher does not implement a full quantity conversion engine or automatically block identity solely for unknown UOM. Pack siblings and missing known attributes do block. Thread dimensions, arbitrary pack counts, unknown vocabulary, complex multi-item messages and full negation remain limited. No LLM/embedding experiment was run; no model advantage is claimed.
+
+## Shipping gates and benchmark maintenance
+`regression_check.py` fails if evaluator, matcher, policy, split or consumed data hashes differ from the saved report, or prediction provenance is stale. Re-run evaluation explicitly after changes; inspect the diff rather than overwriting the benchmark silently. It requires validation precision >=98%, zero wrong autos, coverage >=20%, gain >=1,200, recall@3 >=80%, ECE <=0.10, Brier <=0.16 and mature/cold p95 <=250 ms. These are regression tolerances around this frozen baseline, not statistical guarantees. Unit tests separately enforce schema/tenant/eligibility, evidence conflicts, pack/specification guards and determinism. Current tests must pass before shipping; no force-updating expected values to hide a regression.
+
+Production benchmark refresh needs versioned examples, adjudicator/date/provenance, duplicate-group isolation, and a new untouched test set before further tuning. Keep unresolved annotation concerns visible; do not replace official labels. Canary rollback should consider delayed shipment outcomes and subgroup drift, not just these small offline gates.
+
+---
+
+# Historical checkpoints and personal analysis
 Status: measured review-only baseline and development retrieval experiment; 20 guided personal reviews and specific label concerns recorded. Confidence calibration, final acceptance policy, validation evaluation and numeric regression gates remain incomplete.
 
 ## Reproduction and provenance

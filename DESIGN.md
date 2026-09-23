@@ -1,6 +1,6 @@
 # Task 1 — Problem framing and initial design
 
-Status: pre-implementation design. Proposed policies and targets are not measured results. AI-assisted draft; Sadad must understand and defend the choices. Final operating point will be updated after evaluation.
+Status: final implemented design with measured limits. AI-assisted; Sadad must understand and defend the choices. Historical proposed controls are distinguished from delivered behaviour below.
 
 ## 1. Objective and operating point
 Resolve an order line to exactly one eligible catalogue item for its tenant or abstain. Wrong automatic matches can ship wrong goods and contaminate future aliases; ordinary spelling errors matter mainly when they lead to those outcomes.
@@ -49,5 +49,9 @@ Evaluation reports precision, coverage, utility, accuracy with its definition, t
 
 Production expansion requires measured traffic, review capacity, adjudicated delayed outcomes, tenant skew and latency evidence. Revisit models only for measured retrieval gaps; infrastructure only for demonstrated limits. Protected timeboxes cover report and sync tasks; preserve packaging and rehearsal rather than spending the entire assessment on matching.
 
-## Development checkpoint
-Initial lexical retrieval now combines token and character-trigram cosine with explicit attribute checks. Development recall@3 is 210/220, but every tested similarity-only proposal threshold loses utility relative to review. Acceptance remains disabled while failures are investigated; no score-to-confidence calibration is claimed. This evidence supersedes any implication that the provisional 98% precision goal has been attained. See EVAL.md for counts, timing and limitations.
+## Delivered policy and measured boundary
+The final matcher uses deterministic identifier and lexical retrieval with pack/known-attribute guards, followed by a frozen empirical evidence-group policy. Coarse Beta(1,1) confidence estimates top-candidate correctness from development-only groups. At least ten examples, 98% observed correctness and positive expected utility are required to enable a group; hard issues still block. Exact-name requests form a separate group because development labels often expect abstention despite exact names. This is a disclosed annotation/distribution risk, not a general preference for misspellings.
+
+Policy was committed before validation. It produced 26 correct autos, zero wrong autos and 22.81% coverage on 114 validation lines; the Wilson precision interval is roughly 87.1%–100%, so a population 98% guarantee is not established. Candidate recall@3 is 84% on validation. Warm measured p95 is 42.37 ms over all train; new-tenant alias removal reduces all-train coverage from 30.95% to 29.29% and candidate recall from 92.54% to 88.81%. These are host measurements, not laptop certification.
+
+The delivered component is Matcher in matcher/service.py, with CLI evaluation/prediction tools. Unknown units, stock shortages and price differences do not silently substitute identity; full quantity conversion/fulfilment remains out of scope. Explicit Bulk families, known missing attributes and identifier contradictions are handled; arbitrary pack wording, thread dimensions and full negation/multi-item parsing are not. No embeddings or LLM are required. EVAL.md records calibration, subgroup metrics, the complete personal review and immutable official-label concerns.
