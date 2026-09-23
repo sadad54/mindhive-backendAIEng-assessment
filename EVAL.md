@@ -288,3 +288,15 @@ Status: Sadad confirmed review until both quantity unit and product variant are 
 **Proposed response:** Ask whether five means packets or cartons and which variant/pack size is intended. If cartons, ask whether each contains 10 or 144 packets. Even for packets, require evidence distinguishing codes or a verified business rule making them interchangeable; do not silently choose by stock or score.
 **Regression proposal (assistant-suggested):** Confirming only Carton must preserve review while both pack variants remain. Explicit, consistent unit and variant evidence can resolve the order. Quantity or inventory changes alone must not switch the code.
 **Grouping:** Same pack-variant capability gap as Cases 4 and 9, plus missing quantity unit as in Case 8. Original labels retained.
+
+## Personal review 14 — ACM-T-0174
+Status: Sadad supplied judgement in guided review. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes standard ACM-HEXB0675 for Tolsen Hex Bolt M8x50, quantity 1 ctn; supplied label is blank.
+**Evidence:** The text omits finish/material. Active same-brand/same-size variants include HDG standard (6 Pcs/carton, stock 0), HDG Bulk (144 Pcs/carton, stock 0), Zinc Plated (100 Pcs/carton, stock 40), Stainless 304 (100 Pcs/carton, stock 900), and Stainless 316 (24 Pcs/carton, stock 900). No price, barcode or buyer SKU resolves the choice.
+**Sadad's judgement:** Ask the customer to specify finish/material and resolve any remaining variant ambiguity. Availability of a stainless variant does not justify selecting it instead of HDG because the request is still too vague.
+**Root cause:** Missing required-attribute ambiguity handling: absence of a contradiction was treated as sufficient support even though multiple finishes/materials fit the underspecified text. HDG additionally has a pack-sibling ambiguity. Similarity ranking does not establish the omitted specification.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent), with potential wrong-material/finish and pack-quantity consequences.
+**Proposed response:** Keep in review; ask which finish/material is required, including the stainless grade if relevant. If HDG is selected, clarify 6 versus 144 pieces per carton. Inventory may inform fulfilment options after identification, but must not silently substitute a different specification. Original labels retained.
+**Regression proposal (assistant-suggested):** An M8x50 request without finish/material must review when these siblings are eligible. Changing inventory alone must not resolve the ambiguity. Explicit finish/material narrows the family; selecting HDG alone must still preserve the pack ambiguity.
+**Grouping:** Missing specification capability, related to Case 6; residual HDG pack ambiguity relates to Cases 4 and 9.
