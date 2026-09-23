@@ -203,3 +203,27 @@ Status: Sadad supplied judgement in guided review. Grade and quantity clarificat
 **Regression proposal (assistant-suggested):** An unspecified critical grade without an approved default remains unresolved. Explicit 410 or a verified scoped default can resolve that attribute; a contradictory grade cannot. Test screws/packets/cartons separately and never assume a pieces-per-packet factor.
 
 **Grouping:** Missing-specification handling plus quantity/UOM clarification. This is distinct from an explicit identifier/text contradiction.
+
+## Personal review 07 — ACM-T-0123
+Status: Sadad supplied judgement in guided review. AI organised evidence and edited the entry; quantity and pricing clarification remain open.
+
+**Observed failure:** Experimental policy proposes ACM-NITR0671 for Bosco Nitrile Glove L Black; supplied label is blank.
+**Evidence:** Exact active product-name match; request 2 unit, catalogue unit Box, stock 12 boxes; order/list prices 336.95/303.93.
+**Sadad's judgement:** Retain the proposed identity while clarifying unit and price. He initially assumed two gloves would not be purchased; that purchasing assumption is not verified evidence that boxes were intended.
+**Root-cause assessment:** Product identity appears supported, but generic unit semantics and the price discrepancy are unresolved. No confirmed label defect or price-error source.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent); actual wrong-product shipment not established.
+**Proposed response:** Ask whether two boxes are intended and clarify price basis separately. Do not infer packaging from typical buying behaviour or treat a price difference alone as an identity contradiction.
+**Regression proposal (assistant-suggested):** Generic unit does not automatically map to Box without a confirmed scoped convention; price-only changes do not force a different identity under an identity-only contract.
+**Grouping:** Supported identity with quantity/pricing clarification. Preserve original labels.
+
+## Personal review 08 — ACM-T-0130
+Status: Sadad supplied judgement in guided review; quantity/fulfilment unresolved. AI organised evidence and edited the entry.
+
+**Observed failure:** Experimental policy proposes ACM-SELF0072 for Remax Self Drilling Screw #8 x 1" Zinc Plated; official label is blank.
+**Evidence:** Exact active name match; quantity 5 with missing UOM. Stock unit Packet, carton factor 10 packets, available_qty=0. Order/list prices 295.06/300.31.
+**Sadad's judgement:** Group with product-identity-supported but quantity/fulfilment-unresolved cases; ask whether 5 means packets or cartons.
+**Root-cause assessment:** Missing quantity unit and separate stock constraint; these do not prove a different product identity or explain the annotation conclusively.
+**Cost class:** Wrong-auto proposal against official labels (800 seconds-equivalent), with potential quantity error. Stock timing is not verified.
+**Proposed response:** Clarify packets versus cartons before conversion; five cartons would be 50 packets under the supplied conversion, whereas five packets stays five packets. If individual screws were intended, an additional pieces-per-packet conversion would be needed. Do not derive it from carton factor or price. Keep fulfilment and price checks separate from identity and preserve official labels.
+**Regression proposal (assistant-suggested):** Missing UOM remains unresolved; explicit Packet and Carton produce 5 and 50 stock packets respectively, without changing identity where no pack sibling ambiguity exists. No implicit pieces conversion.
+**Grouping:** Supported identity with quantity/fulfilment clarification, related to Cases 1, 5 and 7.
