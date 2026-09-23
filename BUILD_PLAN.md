@@ -1,3 +1,7 @@
+# Delivery checkpoint
+
+Core deliverables are implemented and measured. The historical effort plan below is retained; its unchecked boxes describe the earlier plan, not the final status. README.md is the current run/status entry point. Final remaining human work: laptop reproduction, live-code walkthrough practice, and confirming submission format. See WALKTHROUGH.md.
+
 # Build plan and requirement gates
 
 Status: Task 1 initial draft and Task 2/3 review-baseline foundation delivered, 22 September 2026. Task 1 first, then bounded implementation milestones. Rebase timeboxes against actual remaining deadline; these are effort budgets, not assertions of remaining time.

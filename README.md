@@ -1,80 +1,84 @@
-# Mindhive backend assessment
+# Mindhive backend assessment — Sadad
 
-Status: Task 2/3 foundation delivered: pinned inputs, tenant-scoped catalogue loading, validated result contract, review-only baseline and measured evaluation harness. Identifier evidence retrieval and a frozen grouped split are also delivered; automatic acceptance, calibration, final evaluation, report rewrite, sync fixes and holdout predictions remain unfinished.
+A deterministic, offline, tenant-scoped matcher with cautious automatic acceptance; reproducible evaluation; a fast exact report rewrite; and a durable ERP sync adapter.
 
-## Assessment source
-[Mindhive brief](https://github.com/mindhiveasia/2026-backend-engineer-assessment/blob/e7ab5fd523f1db783eec517214ac6e75d33f6d5d/README.md), version 2026.1.
-Source revision: e7ab5fd523f1db783eec517214ac6e75d33f6d5d.
-An unchanged copy is retained in docs/ASSESSMENT_BRIEF.md.
+## Delivered and measured
+- **Matcher:** frozen development-fit evidence-group confidence, identifier/text contradiction checks, explicit Bulk pack ambiguity and known missing-attribute guards. Validation: **26/26 correct autos, 22.81% coverage**, 84% recall@3. This small sample does not establish guaranteed 98% production precision.
+- **Evaluation:** grouped 306/114 development/validation split; confidence curve, calibration, tenant/noise proxies, cold-start ablation, measured latency, 20 case judgements supplied by Sadad and four argued label concerns. Warm all-train p95 **42.37 ms** on the execution host.
+- **Predictions:** all **300 holdout lines**, generated after policy freeze; 94 auto / 205 review / 1 reject. Holdout accuracy is unknown.
+- **Report:** **8,666 rows**, strict equality with all supplied reference values, nearest-rank p95 independently verified. Five-run median **3.354 s**, below the 10-second budget on this host.
+- **Sync:** durable SQLite outbox/cursor transactions, stable retry identity, explicit conflicts, bounded timestamp overlap and crash recovery. Original starter and vendor remain unchanged.
+- **Tests:** 56 focused tests currently pass. DESIGN.md is below 1,500 words; SCALE.md below 800. See each task document for evidence and limitations.
 
-## Working order
-1. Task 1: DESIGN.md and initial DECISIONS.md.
-2. Tasks 2 and 3: reproducible evaluation baseline, then incremental matcher and personal error analysis.
-3. Task 4: measured report diagnosis and rewrite.
-4. Task 5: isolated sync reproductions and fixes.
-5. Task 6: evidence-based scale/rollout analysis.
-6. Freeze, generate predictions, verify offline reproduction, rehearse.
-
-See BUILD_PLAN.md for requirement gates, stopping rules and documentation updates.
-
-## Running
-Python 3.10+; standard library only. Original assessment data and starter fixtures are included unchanged, with explicit permission to publish them in this public repository. No download or installation is needed.
-
-Run entirely offline from this repository root:
+## Run on a clean machine
+Python 3.10+ and its standard library only. No installation, credentials, models or inference network calls. Run from the repository root. Data and original starter fixtures are included with explicit permission to publish them.
 
 ```bash
+# Integrity and all unit/regression fixtures
 python3 audit_data.py
 python3 -m unittest discover -s tests -v
+
+# Evaluate the FROZEN policy (does not train)
+python3 evaluate_matcher.py --repeat 2 --output reports/final_evaluation.json
+python3 predict.py
+python3 regression_check.py
+
+# Performance data generation and full rewrite verification
+python3 starter/make_perf_db.py --out data/perf.sqlite
+python3 perf_verify.py
+```
+
+The above workflow is designed to finish well inside ten minutes on a normal laptop; recorded timings are from the execution host, so rerun there. The generated SQLite database is not committed. Rebuilding it replaces that generated file only.
+
+The official report checker also works:
+```bash
+PYTHONPATH=. python3 starter/bench_report.py check --db data/perf.sqlite --module perf_report:run --baseline data/report_reference.json.gz --repeat 5 --budget-s 10
+```
+`PYTHONPATH=.` is a POSIX-shell command; on other shells use perf_verify.py, which already verifies strict reference equality, row order and p95.
+
+Sync-only tests:
+```bash
+python3 -m unittest discover -s tests -p 'test_sync.py' -v
+```
+Use `sync_fixed.adapter.Store(path, tenant)`, `pull(erp, store)` and `push(erp, store)` with the supplied fake vendor or an authenticated tenant-bound client. Unresolved conflicts are persisted; the adapter does not silently choose a winner. Tests use temporary databases.
+
+## Reproducing experiments
+```bash
 python3 evaluate.py --repeat 5 --output reports/baseline_review.json
-```
-
-The evaluation currently sends every labelled line for review. It provides a reproducible comparison point, not a completed matcher. It prints overall, tenant and overlapping input-noise-proxy metrics; `null` means a metric is undefined. Twenty-five tests protect metric arithmetic, tenant/eligibility checks, label separation, leading zeros, determinism through the evaluator, and p95 calculation. Local input data and starter code were imported byte-for-byte at the pinned revision; `docs/INPUT_MANIFEST.json` records their hashes. `audit_data.py` intentionally verifies original fixtures, so later authorised starter changes require an explicit provenance/audit policy update, not silently replacing the original hashes.
-
-Saved reports contain actual measurements and environment/code/data hashes. The p95 currently measures only review-only overhead on the execution host; it does not establish the future matcher's laptop performance. Holdout bytes are preserved but rows have not been inspected or used for tuning. No `predictions.csv` is generated yet.
-
-## Deliverable status
-| File | Status |
-|---|---|
-| DESIGN.md | Initial design; operating point pending measured evaluation |
-| DECISIONS.md | Initial choices recorded; append when real decisions occur |
-| predictions.csv | Not generated; holdout reserved for final inference |
-| EVAL.md | Review baseline measured; calibration, curve and personal analysis pending |
-| PERF.md | Requirements outline; no benchmarks yet |
-| SYNC.md | Requirements outline; no fixes/tests yet |
-| SCALE.md | Requirements outline; final analysis depends on measurements |
-| Source and tests | Review baseline and evaluator; 25 tests pass |
-
-## Assumptions and questions
-- Cost convention: U = 20C - 800W - 40A (correct autos, wrong autos, abstentions). This is our explicit interpretation, not a published grader formula. Record raw counts and sensitivity to alternative cost conventions.
-- Proposed review/reject boundary: review unresolved product identity; reject clear non-item content. An unknown product is not automatically a non-item.
-- Proposed alias validity uses order_date, inclusive start/end dates with blank end unbounded; validate and document any conflicting evidence before implementation.
-- Product identity and stock fulfilment are distinct. Do not silently substitute an in-stock alternative.
-- DESIGN's 98% precision goal is provisional, not measured or mandated. Calibration and final threshold remain open.
-- The README describes a bundle or private repository link for submission. This working repository is public; submission format/access remains to be resolved before delivery. No visibility change has been made.
-- Requirements copy points to §9 for the decision-log format; the actual format is in §10.
-- Reproduced audit: alias file has 776 rows (brief says approximately 710); 26 customer-scoped keys have multiple targets before date filtering. These are not automatically 26 simultaneously valid conflicts. See reports/data_audit.json. Simulator expiry and report-checker semantics remain for Task 4/5 verification.
-
-## Tool attribution and authorship
-ChatGPT/Codex substantially drafted the initial design, planning documents and requirement outlines with Sadad's learning discussion as context. These are proposed engineering choices, not claims that Sadad personally completed an audit or experiments. Codex also authored the initial loader, review baseline, audit/evaluation scripts and automated tests, and ran their recorded verification. These automated checks are not Sadad's personal failure analysis.
-The 20-case manual failure analysis and label adjudication require Sadad's personal inspection; these sections remain unfilled. Every quantitative result must identify its command, revision/data and environment.
-
-## Commit policy
-Work directly on main as requested. Commit each coherent, verified milestone with its purpose, updating related documentation in the same commit. No force pushes, invented retrospective logs, or single final solution commit. Experimental failures may be committed with an explicit status; never label a known failure as passing.
-
-## Fixture provenance
-The user explicitly approved publishing the original data and starter files on 2026-09-22. All 13 files match their pinned original Git blob hashes, including the compressed reference. prepare_inputs.py is an optional checksum-verified recovery tool, not a required setup step.
-
-## Identifier retrieval checkpoint
-```bash
-python3 split_data.py
 python3 inspect_identifiers.py
-```
-The split is frozen (306 development / 114 validation); regeneration refuses changed assignments. Identifier inspection scores development only and compares alias-enabled versus catalogue-only retrieval. It is separate from evaluate.py's unchanged review baseline. Evidence carries candidate codes, sources and issue tokens; it makes no confidence or auto-acceptance claim. Numeric contradiction checks are deliberately conservative and do not yet distinguish all dimensions from quantities or detect brand/material conflicts. See EVAL.md.
-
-## Lexical development experiment
-```bash
 python3 inspect_lexical.py
+# Explicit development-only fitting; not part of normal inference:
+python3 fit_policy.py
+# Slow-query diagnosis: bounded slices ONLY, never full original baseline:
+python3 perf_diagnose.py
+python3 perf_scale.py
+python3 perf_ablate.py
+python3 perf_channels.py
 ```
-This reads development rows only and compares provisional similarity thresholds. Character-trigram and token cosine retrieval adds candidates for noisy names; explicit known brand, dimensions, colour, material, steel-grade, disc-type and pipe-class contradictions are checked. Original names/identifiers are preserved; normalisation applies to retrieval text only.
+Historical saved reports correspond to their committed code versions; rerunning inspect_lexical.py on the final code naturally produces a later result. Original lexical and pack-only reports are retained. Do not overwrite them and claim the earlier implementation produced new numbers. Final reports and prediction manifests include code/data hashes. Re-fitting after looking at validation requires a new untouched test set before claiming independent validation.
 
-The current experiment is unsafe for automatic acceptance: every tested threshold has negative improvement versus all-review under our cost convention. `evaluate.py` therefore remains the honest review-only baseline. Do not treat similarity as confidence. reports/lexical_development.json includes 20 proposed-failure traces for Sadad to inspect, with root-cause/fix fields intentionally blank. Full quantity/pack parsing, unfamiliar brands and broader attribute coverage remain gaps.
+## Files to read
+| Task | Implementation | Evidence |
+|---|---|---|
+| 1 — framing | DESIGN.md | Objective, pipeline, six expensive failures, boundaries |
+| 2 — matcher | matcher/service.py, lexical.py, identifiers.py, policy.json; predict.py | predictions.csv, prediction manifest |
+| 3 — evaluation | evaluate_matcher.py, regression_check.py | EVAL.md, reports/final_evaluation.json |
+| 4 — report | perf_report.py, perf_verify.py | PERF.md, diagnosis/scaling/ablation/result JSON |
+| 5 — sync | sync_fixed/adapter.py, tests/test_sync.py | SYNC.md |
+| 6 — scale | SCALE.md | Measured limits versus forecasts |
+| Choices | DECISIONS.md | Real alternatives, evidence and reversal triggers |
+
+## Assumptions, ambiguities and deliberate limits
+- Utility is explicitly interpreted as **20C−800W−40A**, hence improvement over all-review is 60C−760W. The brief mixes savings and costs without an explicit scoring formula; raw counts and alternative cost sensitivity are reported.
+- Product identity is separate from stock, commercial pricing and quantity fulfilment. Unresolved units/pricing/shortages do not silently substitute products. Whether they should block identity labels remains a business/annotation question. Official labels were never changed.
+- The matcher handles known attributes and explicit Bulk siblings, not a full quantity/UOM parser, arbitrary pack naming, all thread dimensions or general multi-item/negation semantics. Low coverage and Acme validation retrieval gaps remain. No embeddings/LLMs were benchmarked or included.
+- Grouped validation is small and all 20 personally discussed failure traces are Acme blank-label cases from the earlier experimental policy. Their selection is disclosed; they are not representative of every failure type or both tenants.
+- The fake vendor describes 60-second idempotency expiry but implements an unexpired dictionary. Tests simulate expiry without changing it. Stable snapshot pagination, deletions and unlimited same-second buckets cannot be made fully correct with the available vendor API; the adapter stops rather than advance an unsafe cursor.
+- The generated report data contains invalid calendar dates. The rewrite delegates previous-day calculation to SQLite to preserve original semantics. Ordinary Python sum initially differed from SQLite's stable AVG; math.fsum corrected it. Final supplied-reference equality is exact on this dataset.
+- The brief estimates ~710 aliases; supplied data has 776. Its decision-log cross-reference points to §9; the format is actually §10.
+- The assessment requests a bundle or private repository link. This working repository is public with your approval; before submitting, confirm the acceptable format or create a local archive. No visibility change or submission has been performed.
+
+## Provenance and authorship
+[Original brief](https://github.com/mindhiveasia/2026-backend-engineer-assessment/blob/e7ab5fd523f1db783eec517214ac6e75d33f6d5d/README.md), version 2026.1, pinned commit e7ab5fd523f1db783eec517214ac6e75d33f6d5d. docs/ASSESSMENT_BRIEF.md and the 13 imported data/starter files remain unchanged; docs/INPUT_MANIFEST.json and audit_data.py verify hashes.
+
+ChatGPT/Codex substantially authored the code, tests, measurements and engineering documentation. Sadad provided each of the 20 personal case judgements through guided discussion; assistant refinements/regression proposals are attributed. Tool-produced evidence is not claimed as Sadad's unaided analysis. Sadad must review the code and defend the decisions during the live walkthrough. See WALKTHROUGH.md for the remaining preparation.

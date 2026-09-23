@@ -31,7 +31,7 @@ def audit(root):
                     "with_end_date_not_necessarily_expired": sum(bool(r["valid_to"]) for r in aliases),
                     "inferred_source": sum(r["source"] == "inferred_match" for r in aliases),
                     "confidence_below_one": sum(float(r["confidence"]) < 1 for r in aliases)},
-        "holdout": "bytes verified only; no rows parsed or tuned against",
+        "holdout": "this audit verifies bytes only; holdout inference is performed separately by predict.py",
     }
 
 
