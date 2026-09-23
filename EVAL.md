@@ -264,3 +264,15 @@ Status: Sadad supplied judgement in guided review; label/pricing clarification r
 **Proposed response:** Ask why this otherwise matching item/unit expects abstention and whether price differences have a defined acceptance rule. Verify price basis separately. Keep official labels and primary metrics unchanged; do not substitute another item to match price.
 **Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, varying commercial price or stock alone should not change the resolved item. Explicit description or pack contradictions must still trigger the appropriate guard.
 **Grouping:** Label/pricing-rule clarification, related to Case 2, with no observed quantity-unit mismatch in this case.
+
+## Personal review 12 — ACM-T-0157
+Status: Sadad supplied judgement in guided review; annotation/business-rule clarification remains open. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-PVCP0117 for Tolsen - PVC - Pipe - 25mm - Class - C; supplied label is blank.
+**Evidence:** Active matching product after separator cleanup; request 6 lengths, stock unit Length, displayed stock 3 lengths. No order price, barcode or buyer SKU.
+**Sadad's judgement:** Retain identity and flag insufficient stock. Clarify the meaning/reason of the label with the business. Inform the customer that partial fulfilment may be possible, obtain approval before proceeding, and notify fulfilment about restocking.
+**Root-cause assessment:** Suspected conflation of identity resolution with fulfilment or an unresolved annotation rule. Blank is already defined as expected abstention; the unanswered question is why abstention was assigned here, not what blank means. The catalogue snapshot does not establish historical stock at the order date.
+**Cost class:** Wrong-auto proposal under supplied labels (800 seconds-equivalent); a wrong product is not independently established. The visible operational issue is inability to cover six stock lengths with a snapshot of three.
+**Proposed response:** Confirm live stock and the business rule for shortages; separate identity from fulfilment status. Present partial supply/backorder options without changing quantity, promising a restock date or shipping without authorisation. Inventory alerts follow the business workflow, not an automatic replenishment action by the matcher. Preserve official labels/metrics pending adjudication.
+**Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, changing available quantity from six to three retains the item code while a separate fulfilment check flags shortage. Partial fulfilment must not silently rewrite the order quantity.
+**Grouping:** Supported identity with insufficient-stock/label clarification, related to Case 1. No observed unit mismatch here.
