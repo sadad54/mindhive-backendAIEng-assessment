@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "scope": "fit on frozen development only",
+  "method": "Beta(1,1) posterior mean by evidence bucket; no-candidate confidence zero",
+  "minimum_bucket_n": 10,
+  "observed_precision_target": 0.98,
+  "utility_probability_floor": 0.926829268292683,
+  "enabled_buckets": [
+    "identifier",
+    "lexical_high",
+    "lexical_other"
+  ],
+  "buckets": {
+    "lexical_exact": {
+      "n": 70,
+      "correct": 55,
+      "probability": 0.7777777777777778,
+      "observed_precision": 0.7857142857142857,
+      "wilson95": [
+        0.6760859281841939,
+        0.8656141433202155
+      ]
+    },
+    "lexical_other": {
+      "n": 56,
+      "correct": 56,
+      "probability": 0.9827586206896551,
+      "observed_precision": 1.0,
+      "wilson95": [
+        0.9358038555118846,
+        1
+      ]
+    },
+    "blocked": {
+      "n": 95,
+      "correct": 41,
+      "probability": 0.4329896907216495,
+      "observed_precision": 0.43157894736842106,
+      "wilson95": [
+        0.336556700478959,
+        0.5319197304974721
+      ]
+    },
+    "no_candidate": {
+      "n": 37,
+      "correct": 0,
+      "probability": 0.0,
+      "observed_precision": 0.0,
+      "wilson95": [
+        0,
+        0.09406095745514377
+      ]
+    },
+    "lexical_high": {
+      "n": 33,
+      "correct": 33,
+      "probability": 0.9714285714285714,
+      "observed_precision": 1.0,
+      "wilson95": [
+        0.8957265699643882,
+        1
+      ]
+    },
+    "identifier": {
+      "n": 15,
+      "correct": 15,
+      "probability": 0.9411764705882353,
+      "observed_precision": 1.0,
+      "wilson95": [
+        0.7961107336956521,
+        1
+      ]
+    }
+  },
+  "train_sha256": "8e4e983045926d01accac152d5df62c3af9d6726516999b4ef80e90dee370313",
+  "split_sha256": "e8d84837c11ef4e50f55a73a8788dea7be742766baa71f1cb5c5ee4c60a288ad"
+}

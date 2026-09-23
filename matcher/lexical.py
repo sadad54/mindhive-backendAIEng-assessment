@@ -10,6 +10,8 @@ from matcher.identifiers import IdentifierIndex
 
 def normalise(text):
     text = text.casefold().replace('″', ' inch ').replace('"', ' inch ').replace("''", ' inch ')
+    text = re.sub(r'\bss(?=\s*\d)', 'stainless ', text)
+    text = re.sub(r'\bsds\b', 'self drilling screw', text)
     # Preserve numerical fractions while making slash-separated words searchable.
     text = re.sub(r'(?<!\d)/|/(?!\d)', ' ', text)
     text = re.sub(r'\bz\s*\.\s*p\.?\b', 'zinc plated', text)
@@ -40,7 +42,7 @@ def attributes(text):
     for key,pattern in [('colour',r'\b(red|blue|brown|white|black|yellow|green)\b'),
                         ('grade',r'\bclass ([a-z])\b'),
                         ('disc_kind',r'\b(grinding|cutting|flap)\b'),
-                        ('material',r'\b(stainless|zinc plated|brass|pvc)\b'),
+                        ('material',r'\b(stainless|zinc plated|brass|pvc|hdg)\b'),
                         ('steel_grade',r'\bstainless (304|316|410)\b')]:
         values=set(re.findall(pattern,text))
         if values:out[key]=values
@@ -167,4 +169,17 @@ class LexicalIndex:
         if not top:issues.add('no_candidate_above_floor')
         margin=top[0].score-top[1].score if len(top)>1 else top[0].score if top else 0
         if top and margin<.05:issues.add('small_candidate_margin')
+        if top:
+            offered=self.prepared[line.tenant][top[0].code][3]
+            # A missing critical specification is not proof of a mismatch, but requires review.
+            # A unique conflict-free identifier may supply omitted information.
+            supported=(len(evidence.codes)==1 and not evidence.issues
+                       and evidence.codes[0]==top[0].code
+                       and 'identifier_text_conflict' not in issues)
+            if not supported:
+                for key in ('material','steel_grade','grade','colour','disc_kind','length','weight','volume'):
+                    if key in offered and key not in attrs:
+                        issues.add('missing_'+key)
+            if re.search(r'\b(not|except|instead|or)\b',query):
+                issues.add('complex_request')
         return Retrieval(top,tuple(sorted(issues)),len(exact)==1,margin)

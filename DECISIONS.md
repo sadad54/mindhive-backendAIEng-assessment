@@ -71,3 +71,10 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** A tenant-scoped full-family guard for explicit Bulk siblings with otherwise identical names, brand and stock unit but different conversions. Literal variant wording or unique issue-free identifiers may resolve the family; quantity, stock and price cannot.
 **Evidence:** 32 tests pass. At unchanged development threshold 0.90, wrong proposals fall 27 to 16 with correct proposals unchanged at 101; recall@3 remains 210/220. All tested operating points still have negative utility, so review remains enabled. See EVAL.md and reports/pack_guard_development.json.
 **Reversal trigger:** Broader real catalogue pack naming or negated/multi-item wording requires a stronger parser and new fixtures; do not extend family grouping by arbitrary similarity without measuring false ambiguity. This guard is not complete packaging support.
+
+## D-11 — Freeze coarse evidence-group confidence before validation
+**Context:** Raw similarity was not calibrated and exact names often disagreed with supplied blank labels. Missing material/grade and pack ambiguity require hard review guards.
+**Options:** Invent high confidence for exact names; change questionable labels; fit coarse correctness frequencies on development only.
+**Chose:** Six explicit evidence groups, Beta(1,1) smoothing, minimum 10 examples and >=98% observed correctness plus positive expected utility to enable a group. Preserve original labels and freeze before validation. Missing-attribute/contradiction flags block acceptance.
+**Evidence:** Development counts and Wilson intervals in matcher/policy.json; identifier 15/15, high lexical 33/33, other lexical 56/56, exact lexical 55/70. Counterintuitive exact/non-exact behaviour is disclosed as a distribution risk, not explained away.
+**Reversal trigger:** Failed frozen validation or adjudicated production drift disables the policy; do not repeatedly tune on the same validation set. More data is needed for tenant-specific calibration.
