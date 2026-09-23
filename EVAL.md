@@ -184,3 +184,22 @@ Status: Sadad supplied judgement in guided review; clarification pending. AI org
 **Regression proposal (assistant-suggested):** Under a confirmed unit-to-Length convention, six units should preserve product identity and mean six stock lengths. Unknown conventions retain review evidence; no conversion to metres or other physical quantity without a specified length.
 
 **Grouping:** Specification/label clarification with generic-unit semantics (Case 3) and a separate stock concern (Case 1).
+
+## Personal review 06 — ACM-T-0114
+Status: Sadad supplied judgement in guided review. Grade and quantity clarification remain open; AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-SELF0720, Stallion Self Drilling Screw #10 x 1" Stainless 410, for text specifying Stainless without 410; supplied label is blank.
+
+**Evidence:** One matching stainless variant was found; the other inspected same-brand/same-size variant is Zinc Plated. Order quantity 100 has no UOM. Stock unit is Packet; one carton contains 10 packets, with no pieces-per-packet conversion supplied here. Stock is 3 packets. Order/list prices are 432.52/442.19.
+
+**Sadad's judgement:** Require confirmation of the grade and ask whether 100 means screws, packets or cartons. He also suggested that the only listed grade was probably intended. That is retained as a hypothesis, not confirmation or an authorised default.
+
+**Root-cause assessment:** The score-based proposal did not require resolution of omitted grade/quantity details. Unique catalogue availability narrows candidates but does not establish customer requirements. The intended grade, quantity unit and reason for the blank annotation are not independently confirmed.
+
+**Cost class:** Wrong-auto proposal against supplied labels, with potential material-specification or quantity error. Neither stock comparison nor price similarity resolves the unknown order unit.
+
+**Proposed response:** Ask whether Stainless 410 is intended and what unit applies to 100. Accept an omitted grade by default only under an established, scoped business/customer convention, not because there is one stocked/listed option. Preserve supplied labels and avoid inferring pieces from packet/carton conversion.
+
+**Regression proposal (assistant-suggested):** An unspecified critical grade without an approved default remains unresolved. Explicit 410 or a verified scoped default can resolve that attribute; a contradictory grade cannot. Test screws/packets/cartons separately and never assume a pieces-per-packet factor.
+
+**Grouping:** Missing-specification handling plus quantity/UOM clarification. This is distinct from an explicit identifier/text contradiction.
