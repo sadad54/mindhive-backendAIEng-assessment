@@ -405,3 +405,12 @@ Keep supplied labels for primary metrics. Any later adjudication must record rat
 3. Re-run development evaluation, compare utility/precision/coverage and inspect remaining failures. Only then choose and freeze an acceptance/calibration policy for validation.
 4. Complete the remaining numeric regression gates and final evaluation deliverables; these twenty reviews do not complete Task 3 or the overall assessment.
 
+
+## Pack-ambiguity safeguard checkpoint
+After personal review, the first implemented guard groups tenant-eligible items with identical normalised names after removing the explicit Bulk token, matching brand and stock unit, but differing catalogue conversion signatures. It checks the full family before top-three truncation. Quantity, stock and price never choose the pack. Explicit Bulk/standard wording or a unique issue-free identifier can narrow the family; contradictory pack/identifier evidence remains blocked. This is a retrieval/policy guard, not a calibrated confidence model.
+
+Command: `python3 inspect_lexical.py > reports/pack_guard_development.json`. The original lexical_development.json is preserved. All 32 tests pass; development recall@3 remains 210/220. At the unchanged 0.90 threshold, proposals change from 128 (101 correct, 27 wrong) to 117 (101 correct, 16 wrong): precision 86.32%, coverage 38.24%, utility improvement versus all-review -6,100 rather than -14,460 seconds-equivalent. Every tested threshold still loses against review. No automatic policy is enabled; validation and holdout remain unscored.
+
+Warm retrieval p95 was 22.898 ms across 306 calls after a warm pass on this host. This is not a controlled speedup claim against the earlier run. The report records current source/data hashes and the full curve.
+
+Limitations: the family rule recognises explicit Bulk siblings, not arbitrary packaging nomenclature; explicit pack-count parsing and omitted-attribute guards remain unfinished. Bulk/standard wording recognition is literal and does not understand negation or multiple product clauses. Unknown or conflicting evidence must not be treated as proof of safety. At threshold 0.60 the change also removes two correct proposals, illustrating the coverage tradeoff. No stock, price or unit rule was invented to fit blank labels.

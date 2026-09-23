@@ -1,5 +1,6 @@
 """Deterministic lexical evidence. Scores are similarity, never probabilities."""
 import math
+import json
 import re
 from collections import Counter
 from dataclasses import dataclass
@@ -71,6 +72,8 @@ class LexicalIndex:
         self.identifiers=identifiers or IdentifierIndex(catalogue)
         self.prepared={}
         self.brands={}
+        self.pack_families={}
+        self.family_for={}
         for tenant,items in catalogue.by_tenant.items():
             self.brands[tenant]={normalise(i.get('brand','')) for i in items.values() if i.get('brand')}
             self.prepared[tenant]={}
@@ -78,6 +81,48 @@ class LexicalIndex:
                 if catalogue.eligible(tenant,code):
                     name=normalise(item['item_name'])
                     self.prepared[tenant][code]=(name,Counter(name.split()),grams(name),attributes(item['item_name']))
+                    # Only explicit Bulk siblings with identical remaining names are grouped.
+                    # Stock and prices never participate in family identity.
+                    family=(tenant,normalise(item.get('brand','')),
+                            re.sub(r'\bbulk\b','',name).strip(),
+                            item.get('stock_uom','').casefold())
+                    self.pack_families.setdefault(family,[]).append(code)
+                    self.family_for[(tenant,code)]=family
+        self.pack_families={key:tuple(sorted(codes)) for key,codes in self.pack_families.items()
+                            if len(codes)>1 and any('bulk' in self.prepared[key[0]][c][0].split() for c in codes)
+                            and len({self.pack_signature(catalogue.get(key[0],c)) for c in codes})>1}
+
+    @staticmethod
+    def pack_signature(item):
+        conversions=json.loads(item.get('uom_conversions') or '[]')
+        return tuple(sorted((entry['uom'].casefold(),float(entry['conversion_factor']))
+                            for entry in conversions))
+
+    def pack_choices(self,line,evidence,compatible):
+        """Restrict only known pack families; unresolved families remain review evidence."""
+        words=set(normalise(line.raw_text).split())
+        requested=words & {'bulk','standard'}
+        issues=set()
+        allowed={r.code for r in compatible}
+        families={self.family_for[(line.tenant,r.code)] for r in compatible}
+        for family in families:
+            siblings=self.pack_families.get(family)
+            if not siblings:
+                continue
+            choices=set(siblings)
+            if len(requested)==1:
+                bulk='bulk' in requested
+                choices={c for c in choices if ('bulk' in self.prepared[line.tenant][c][0].split())==bulk}
+            if len(evidence.codes)==1 and not evidence.issues and evidence.codes[0] in siblings:
+                choices &= set(evidence.codes)
+            # Do not let conflicting evidence silently empty a family and promote another item.
+            if not choices or len(requested)>1:
+                if any(r.code in siblings and r.score>=.25 for r in compatible):
+                    issues.add('pack_evidence_conflict')
+            else:
+                allowed -= set(siblings)-choices
+        return [r for r in compatible if r.code in allowed],issues
+
 
     def retrieve(self,line):
         if line.tenant not in self.prepared:
@@ -109,7 +154,14 @@ class LexicalIndex:
             # Keep conflicts visible for debugging but do not promote them over compatible candidates.
             ranked.append(Ranked(code,round(score,8),tuple(sorted(bad))))
         compatible=sorted((r for r in ranked if not r.conflicts),key=lambda r:(-r.score,r.code))
+        compatible,pack_issues=self.pack_choices(line,evidence,compatible)
+        issues.update(pack_issues)
         top=tuple(r for r in compatible[:3] if r.score>=.25)
+        if top:
+            siblings=self.pack_families.get(self.family_for[(line.tenant,top[0].code)],())
+            remaining={r.code for r in compatible}
+            if len(remaining.intersection(siblings))>1:
+                issues.add('ambiguous_pack')
         exact=[r for r in compatible if self.prepared[line.tenant][r.code][0]==query]
         if len(exact)>1:issues.add('ambiguous_exact_names')
         if not top:issues.add('no_candidate_above_floor')

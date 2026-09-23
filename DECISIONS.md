@@ -64,3 +64,10 @@ Initial decisions on 2026-09-22. AI-assisted drafts of actual planning choices, 
 **Chose:** Leave evaluate.py on all-review, record the entire tested curve, and provide case traces for personal inspection before a new acceptance policy.
 **Evidence:** Every tested development threshold from 0.60 to 1.00 has negative improvement over review. At 1.00, 54 of 78 proposed answers are correct against supplied labels. Validation/holdout not used to choose this decision.
 **Reversal trigger:** Better evidence checks plus calibration and a frozen validation evaluation justify an operating point. Do not rewrite official labels to make the curve pass.
+
+## D-10 — Block unresolved explicit Bulk pack siblings before score acceptance
+**Context:** Personal Cases 4, 9, 13 and 18 showed that exact standard names and large score margins do not establish pack identity.
+**Options:** Raise similarity thresholds; infer Bulk from quantity; inspect catalogue sibling conversions.
+**Chose:** A tenant-scoped full-family guard for explicit Bulk siblings with otherwise identical names, brand and stock unit but different conversions. Literal variant wording or unique issue-free identifiers may resolve the family; quantity, stock and price cannot.
+**Evidence:** 32 tests pass. At unchanged development threshold 0.90, wrong proposals fall 27 to 16 with correct proposals unchanged at 101; recall@3 remains 210/220. All tested operating points still have negative utility, so review remains enabled. See EVAL.md and reports/pack_guard_development.json.
+**Reversal trigger:** Broader real catalogue pack naming or negated/multi-item wording requires a stronger parser and new fixtures; do not extend family grouping by arbitrary similarity without measuring false ambiguity. This guard is not complete packaging support.
