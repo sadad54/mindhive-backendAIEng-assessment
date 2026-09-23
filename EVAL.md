@@ -165,3 +165,22 @@ Status: Sadad identified the unresolved pack variant and requested customer clar
 **Regression proposal (assistant-suggested):** A one-carton request with these two pack variants must review. An explicit, nonconflicting pack count or verified unique identifier may resolve the variant; tests must preserve tenant isolation and check the correct conversion. Do not generalise the factors to other products.
 
 **Grouping:** Missing pack-variant capability, distinct from Cases 1–3's unresolved label/business conventions. Original label retained.
+
+## Personal review 05 — ACM-T-0082
+Status: Sadad supplied judgement in guided review; clarification pending. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-PVCP0447 for Hitex PVC Pipe 32mm Class E; official label is blank.
+
+**Evidence:** Exact active catalogue-name match. Order quantity 6, uom_text=unit; catalogue stock_uom=Length, only listed conversion Length=1, available_qty=0. No order price, buyer SKU or barcode supplies further evidence.
+
+**Sadad's judgement:** Six units could mean six individual pieces/lengths of the identified product. Clarify that interpretation before changing the matcher.
+
+**Root-cause assessment:** Suspected unit/business-rule or label ambiguity, not an established identity error. A single catalogue UOM does not prove the customer's intended unit or define physical length per piece. Zero-stock fulfilment remains separate; stock timing relative to the order is unverified.
+
+**Cost class:** Wrong-auto proposal against official labels (800 seconds-equivalent under our convention). Neither actual wrong-product shipment nor the annotation's reason is established.
+
+**Proposed response:** Ask whether six individual lengths are intended and whether unit is an approved synonym for Length for this product/customer. Ask whether unit uncertainty or stock availability is supposed to block item-code resolution. Keep original labels and metrics unchanged until adjudication; do not invent a conversion.
+
+**Regression proposal (assistant-suggested):** Under a confirmed unit-to-Length convention, six units should preserve product identity and mean six stock lengths. Unknown conventions retain review evidence; no conversion to metres or other physical quantity without a specified length.
+
+**Grouping:** Specification/label clarification with generic-unit semantics (Case 3) and a separate stock concern (Case 1).
