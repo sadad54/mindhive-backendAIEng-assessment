@@ -127,3 +127,22 @@ Status: Sadad supplied judgement during guided review; clarification remains unr
 **Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, an otherwise identical item request with a different commercial price should retain its identity; any price-related review rule needs separate evidence and tests.
 
 **Grouping:** Specification/label clarification, with pricing evidence distinct from Case 1's inventory question.
+
+## Personal review 03 — ACM-T-0062
+Status: Sadad supplied judgement in guided review; unit/label clarification remains open. AI organised evidence and edited the entry.
+
+**Observed failure:** Experimental policy proposes ACM-BALL0944 for Vermont/Ball/Valve/2"/Brass; official label is blank. It is a wrong-auto proposal against official labels, not an enabled production decision.
+
+**Evidence:** Unique exact-name match after separator cleanup; active product, stock 12 Nos; requested quantity 2 with uom_text=unit. Catalogue supports Nos (factor 1) and Carton (factor 12). No order price, buyer SKU or barcode supplies further evidence.
+
+**Sadad's judgement:** Product identity is supported; clarify the unit/conversion convention before changing the matcher. He suggested the customer may have used a generic term instead of the exact unit name; this is a possible explanation, not established customer intent.
+
+**Root-cause assessment:** Suspected label/business-rule ambiguity with unresolved unit semantics. Nos is not the only supported UOM: carton is also available. Do not infer unit=Nos solely from familiarity, stock sufficiency or the proposed explanation.
+
+**Cost class:** False-positive proposal under official labels (800 seconds-equivalent in our convention); an actual wrong-product shipment has not been established.
+
+**Proposed response:** Confirm whether unit maps to Nos for this item/customer and whether UOM uncertainty is intended to block item-code resolution. Retain original labels and metrics pending adjudication. A confirmed scoped synonym can support normalisation; do not impose a universal conversion or a per-line label exception.
+
+**Regression proposal (assistant-suggested):** Once the convention is confirmed, verify scoped unit/Nos equivalence and ensure carton retains factor 12. Without confirmation, preserve unresolved quantity evidence rather than silently converting.
+
+**Grouping:** Specification/label clarification, specifically generic-unit interpretation. The proposed customer explanation must not be presented as a proven root cause.
