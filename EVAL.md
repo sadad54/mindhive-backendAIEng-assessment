@@ -1,5 +1,5 @@
 # Task 3 — Evaluation
-Status: measured review-only baseline. Retrieval, confidence calibration, validation selection, operating-point curve and personal analysis are not complete.
+Status: measured review-only baseline and development retrieval experiment; 20 guided personal reviews and specific label concerns recorded. Confidence calibration, final acceptance policy, validation evaluation and numeric regression gates remain incomplete.
 
 ## Reproduction and provenance
 ```bash
@@ -41,12 +41,10 @@ Input-only flags: structured buyer SKU/barcode (77 lines), pack word (76), dimen
 Before tuning an actual matcher, fix a grouped development/validation strategy to limit near-duplicate/alias leakage. Then measure identifiers-only and lexical increments, calibration by lane with uncertainty, a threshold curve, cold-start behaviour and regression thresholds. Baseline confidence is 0 because there is no candidate; it is not a fitted confidence model. Removing aliases currently changes nothing because no matching uses them: the required mature-versus-cold-start behaviour is not yet delivered.
 
 ## Personal error analysis — Sadad
-Not completed. For 20 actual failures record line_id, prediction/label, evidence inspected, root cause, cost class, proposed fix and side effect; group shared bugs/capability gaps/data issues.
-AI may organise evidence but must not fill this as if Sadad personally analysed it.
+Twenty development-policy failures have now been discussed individually with Sadad and recorded below, with evidence, judgement, root-cause assessment, cost class and proposed response. Consolidated groups and safeguard tradeoffs follow the cases. AI organisation/refinements are attributed; no external adjudication has occurred.
 
 ## Label concerns — Sadad
-Not completed. At least three specific lines, supplied label, contradictory/insufficient evidence, proposed adjudication and production response.
-Keep original labels for primary metrics; separate adjudicated sensitivity analysis.
+Four specific concerns distilled from Sadad's reviews are listed under Specific label concerns for adjudication below. Original labels remain unchanged for primary metrics; any adjudicated sensitivity analysis must be separate.
 
 ## Regression gates
 TODO: numeric thresholds based on baseline; zero tenant escapes, deterministic/schema checks, precision/coverage/cost guards, <=250 ms p95, versioned fixtures and benchmark refresh policy.
@@ -361,3 +359,49 @@ Status: Sadad supplied judgement in guided review; quantity-unit clarification r
 **Proposed response:** Confirm the counted unit. If individual screws, obtain the pieces-per-packet conversion and applicable split-pack fulfilment policy before checking sufficiency; if packets, 100 exceeds the displayed stock of 3. Verify live stock before a fulfilment commitment. Clarify pricing separately rather than changing identity solely for a price difference. Preserve original labels and primary metrics.
 **Regression proposal (assistant-suggested):** Do not compare quantities until units are compatible. Explicit 100 packets yields a shortage against 3 packets; 100 individual screws remains unconvertible without a pieces-per-packet factor. Carton=100 packets must never be interpreted as Packet=100 screws.
 **Grouping:** Supported identity with quantity-unit clarification, related to Cases 8 and 15; additionally highlights invalid cross-unit stock comparison.
+
+## Personal review 20 — ACM-T-0218
+Status: Sadad supplied judgement in guided review. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-PVCP0471 for Tolsen PVC Pipe 40mm Class C; supplied label is blank.
+**Evidence:** Exact active catalogue-name match. Request is 10 ea; stock unit Length with only Length=1 listed, displayed stock 0 lengths. Structured order/list prices are 5.38/4.70; no buyer SKU or order barcode supplies further evidence.
+**Sadad's judgement:** Retain identity because the description matches and the product is active. Clarify the unit, inform the customer about zero stock, and request business-rule clarification for the price difference rather than change the matcher.
+**Assistant refinement:** ea already means each; ask whether each refers to one full stock length. Confirm live stock before a customer-facing availability statement because the supplied snapshot may not represent the order date or current inventory.
+**Root-cause assessment:** Supported identity with unresolved each-to-Length semantics, a separate stock constraint, and a pricing/annotation question. None establishes that another product was intended; the reason for the blank label is not confirmed.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent); quantity/fulfilment and pricing concerns are present, but wrong-product shipment is not independently established.
+**Proposed response:** Confirm whether ten full stock lengths are intended; communicate verified unavailability without silently substituting a product or promising replenishment. Clarify price basis and whether availability, unit uncertainty or pricing rules require abstention in this task. Preserve official labels and primary metrics pending adjudication.
+**Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, price/stock-only changes retain the item code while separate operational checks report their concerns. ea must not acquire an unsupported physical-length conversion.
+**Grouping:** Supported identity with unit, stock and pricing clarification, combining the concerns in Cases 1, 5 and 16.
+
+## Consolidated personal-review findings
+All 20 judgements above were supplied by Sadad during one-at-a-time guided review. AI assembled evidence, refined wording and proposed regression tests; these suggestions are attributed separately. The cases are failures of the recorded development-only experimental acceptance policy, not enabled production decisions.
+
+| Group | Cases | Finding and next action |
+|---|---|---|
+| Pack-variant ambiguity | 4, 9, 13, 18; residual ambiguity in 14 | Same missing capability: a score margin can favour the shorter standard name without evidence selecting its pack. Add a family/pack ambiguity guard. |
+| Omitted specification | 6, 14 | Grade/finish requirements remain unresolved. Check eligible siblings and explicitly scoped defaults; catalogue uniqueness is not proof of customer intent. |
+| Quantity-unit uncertainty | 3, 5, 6, 7, 8, 10, 13, 15, 16, 18, 19, 20 | Keep unit interpretation and conversions explicit. Whether this blocks item identity requires a clear task/business contract. Never invent conversion factors. |
+| Label/business-rule clarification | 1, 2, 3, 5, 7, 8, 10, 11, 12, 15, 16, 17, 19, 20 | Supported identity can coexist with unresolved units, prices or fulfilment. These are suspected specification/annotation issues, not proven label defects or reasons to rewrite labels. |
+
+Groups overlap. Twenty affected lines do not mean twenty independent bugs. No implementation exception for a reviewed line is justified. Pack/specification guards may lower coverage or over-abstain if families are grouped too broadly; explicit distinguishing evidence must still allow resolution. Overly broad unit synonyms can create quantity errors, while overly strict synonyms can cause unnecessary reviews. Keeping identity separate from fulfilment is useful only if consistent with the agreed output contract.
+
+**Selection limitation:** These twenty traces are all Acme blank-label false-positive proposals from one development experiment. They do not constitute representative coverage of both tenants, answerable false negatives, or all noise types. Additional evaluation must cover those dimensions without presenting it as personal analysis already performed by Sadad.
+
+## Specific label concerns for adjudication
+The following consolidate Sadad's recorded judgements; they are claims of under-specification requiring clarification, not declarations that the labels are wrong.
+
+| Line | Supplied label and concern | Proposed adjudication and production response |
+|---|---|---|
+| ACM-T-0022 (Case 2) | Blank despite exact active Kanto glove identity, matching Box unit and sufficient displayed stock; order price differs from list price. Why does price warrant identity abstention, if it does? | Ask the annotation/business owner whether price is an acceptance rule and verify its basis. Preserve identity evidence; route pricing discrepancy separately rather than select another item. |
+| ACM-T-0150 (Case 11) | Blank despite exact active Vermont screw identity and request 5 packets against 150 packets; price differs. No observed description or unit contradiction explains abstention. | Obtain the annotation rationale and pricing policy. Retain official scoring; use a separate pricing review if required, without inventing a wrong-item diagnosis. |
+| ACM-T-0157 (Case 12) | Blank for an exact active Tolsen pipe identity with explicit lengths; requested 6 versus displayed stock 3. It is unclear whether matching labels encode fulfilment eligibility. | Confirm whether shortage should block identity resolution and verify inventory timing. Report shortage separately under an identity-only contract; partial supply requires customer approval. |
+| ACM-T-0196 (Case 17) | Blank despite exact active Bosco valve identity, apparently compatible pcs/Nos and sufficient displayed stock. The unit convention and abstention rationale are unspecified. | Confirm pcs=Nos and request the label rationale. Do not silently relabel; preserve identity evidence for review and resolve the business rule before enabling acceptance. |
+
+Keep supplied labels for primary metrics. Any later adjudication must record rationale, reviewer, date and version separately; report sensitivity results separately, never inflate primary metrics with assumed corrections. No external adjudication has occurred.
+
+## Implementation priorities after personal review
+1. Add and test pack-sibling and omitted-attribute ambiguity guards on development data, including cases where explicit evidence resolves ambiguity.
+2. Represent unresolved units without fabricating conversions or conflating fulfilment with identity. Document unresolved contract assumptions.
+3. Re-run development evaluation, compare utility/precision/coverage and inspect remaining failures. Only then choose and freeze an acceptance/calibration policy for validation.
+4. Complete the remaining numeric regression gates and final evaluation deliverables; these twenty reviews do not complete Task 3 or the overall assessment.
+
