@@ -1,0 +1,2 @@
+# Preserve exact input/source bytes for provenance hashes on every platform.
+* -text
