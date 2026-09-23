@@ -251,3 +251,16 @@ Status: Sadad supplied judgement in guided review; unit and pricing questions re
 **Proposed response:** Confirm the intended item and whether each piece is a full stock length; separately confirm the quoted price basis. Do not change the item code or invent a conversion solely to reconcile prices. Preserve official labels pending adjudication.
 **Regression proposal (assistant-suggested):** A confirmed scoped pcs=Length convention allows 100 stock lengths; a request for cut sections requires specified lengths/conversion. A price-only change should not silently substitute another product.
 **Grouping:** Supported identity with unit/pricing clarification, related to Cases 3, 5 and 7, not the pack-sibling ambiguity of Cases 4 and 9.
+
+## Personal review 11 — ACM-T-0150
+Status: Sadad supplied judgement in guided review; label/pricing clarification remains open. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-SELF0108 for Vermont Self Drilling Screw #10 x 1" Zinc Plated; supplied label is blank.
+**Evidence:** Exact active catalogue-name match; request 5 packets, stock unit Packet, displayed stock 150 packets. Order/list prices 125.04/117.45. No barcode or buyer SKU provides additional evidence.
+**Sadad's judgement:** Flag for label/pricing-rule clarification rather than change the matcher. He would look for discrepancies in description, units or stock before questioning the match.
+**Refinement:** Description or packaging contradictions can challenge identity, but stock availability alone concerns fulfilment. A UOM difference must be interpreted using supported conversions rather than automatically treated as a different item.
+**Root-cause assessment:** Suspected annotation/business-rule ambiguity; price discrepancy alone does not establish identity error. No pricing mechanism or reason for the blank label has been proven.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent); wrong-product shipment is not independently established.
+**Proposed response:** Ask why this otherwise matching item/unit expects abstention and whether price differences have a defined acceptance rule. Verify price basis separately. Keep official labels and primary metrics unchanged; do not substitute another item to match price.
+**Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, varying commercial price or stock alone should not change the resolved item. Explicit description or pack contradictions must still trigger the appropriate guard.
+**Grouping:** Label/pricing-rule clarification, related to Case 2, with no observed quantity-unit mismatch in this case.
