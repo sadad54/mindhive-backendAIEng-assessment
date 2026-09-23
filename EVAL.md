@@ -348,3 +348,16 @@ Status: Sadad explicitly applied Case 13's rule in guided review. AI organised e
 **Proposed response:** Ask whether twelve means packets or cartons and which product variant is intended. If cartons, confirm 10 versus 144 packets per carton. Do not infer Bulk from order size or choose the variant whose stock happens to cover the request. Preserve official labels.
 **Regression proposal (assistant-suggested):** Reuse Case 13's guard across quantities five and twelve: quantity-only changes must not resolve missing unit or variant evidence. Confirming only Carton still leaves the pack ambiguous; require consistent distinguishing evidence or an approved scoped business convention.
 **Grouping:** Same capability gap as Case 13 and the pack ambiguity in Cases 4 and 9; this is another affected line, not a separate root cause.
+
+## Personal review 19 — ACM-T-0212
+Status: Sadad supplied judgement in guided review; quantity-unit clarification remains open. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-SELF0989 for Stallion Self Drilling Screw #8 x 3/4" Stainless 410; supplied label is blank.
+**Evidence:** Exact active catalogue-name match. Request is 100 ea; stock unit Packet, carton conversion 100 packets, displayed stock 3 packets. Pieces per packet is not supplied. Structured order/list prices are 287.79/251.54; no buyer SKU or order barcode supplies further evidence.
+**Sadad's judgement:** Retain the identity and clarify what is counted by 100 ea (his wording: "100 for each item"). Insufficient stock cannot be concluded before resolving the unit.
+**Assistant refinement:** Ask explicitly whether the customer means 100 individual screws or 100 packets. The phrase each item alone could leave the same ambiguity unresolved. This wording refinement does not assert a customer answer.
+**Root-cause assessment:** Supported identity with unresolved each-to-stock-unit semantics. Comparing 100 ea directly with 3 packets would mix units. The carton conversion describes packets, not individual screws, and cannot supply the missing pieces-per-packet factor. The reason for the blank annotation remains unconfirmed.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent), with potential quantity/fulfilment error; actual wrong-product shipment is not independently established.
+**Proposed response:** Confirm the counted unit. If individual screws, obtain the pieces-per-packet conversion and applicable split-pack fulfilment policy before checking sufficiency; if packets, 100 exceeds the displayed stock of 3. Verify live stock before a fulfilment commitment. Clarify pricing separately rather than changing identity solely for a price difference. Preserve original labels and primary metrics.
+**Regression proposal (assistant-suggested):** Do not compare quantities until units are compatible. Explicit 100 packets yields a shortage against 3 packets; 100 individual screws remains unconvertible without a pieces-per-packet factor. Carton=100 packets must never be interpreted as Packet=100 screws.
+**Grouping:** Supported identity with quantity-unit clarification, related to Cases 8 and 15; additionally highlights invalid cross-unit stock comparison.
