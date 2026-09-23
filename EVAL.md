@@ -324,3 +324,15 @@ Status: Sadad supplied judgement in guided review; unit and label clarification 
 **Proposed response:** Confirm whether two full stock lengths are intended. Clarify price basis separately without substituting a different item to reconcile prices. Ask whether unresolved quantity or a defined pricing rule explains expected abstention. Preserve original labels and primary metrics pending adjudication.
 **Regression proposal (assistant-suggested):** Missing UOM remains unresolved without a confirmed scoped convention; explicit Length means two stock lengths, with no inferred metres or cut-section conversion. Under a confirmed identity-only contract, price-only changes must not silently change the product code.
 **Grouping:** Supported identity with unit/pricing clarification, related to Cases 5 and 10; no observed product-attribute contradiction.
+
+## Personal review 17 — ACM-T-0196
+Status: Sadad supplied judgement in guided review; label/business-rule clarification remains open. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes ACM-BALL0305 for Bosco Ball Valve 1/2" SS304; supplied label is blank.
+**Evidence:** Exact active catalogue-name match. Request is 50 pcs; catalogue stock unit Nos, carton conversion 10 Nos, displayed stock 900 Nos. No order price, buyer SKU or order barcode supplies further evidence.
+**Sadad's judgement:** Flag for label/business-rule clarification rather than change the matcher: the proposed product matches the description exactly, is active, and pcs and Nos appear compatible.
+**Root-cause assessment:** Suspected annotation/business-rule ambiguity, not a confirmed label defect. The apparent pcs-to-Nos synonym is consistent with individual-item counting but should be confirmed under the applicable unit convention. With that equivalence, the displayed stock covers the request; the snapshot does not establish historical stock.
+**Cost class:** Wrong-auto proposal under official labels (800 seconds-equivalent); no independent evidence here establishes a wrong-product shipment.
+**Proposed response:** Confirm the pcs/Nos convention and ask why this line expects abstention despite matching identity attributes and apparently compatible units. Do not invent an identity mismatch to fit the label or silently relabel it. Preserve official labels and primary metrics; record any adjudication separately.
+**Regression proposal (assistant-suggested):** Under a confirmed pcs=Nos convention, 50 pcs means 50 individual items while 50 cartons means 500. Preserve the unit distinction and product identity; stock-only changes affect fulfilment separately under an identity-only contract.
+**Grouping:** Label/business-rule clarification with apparently compatible unit terminology; related to Case 3, but more specific than generic unit wording.
