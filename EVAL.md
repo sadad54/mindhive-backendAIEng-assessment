@@ -146,3 +146,22 @@ Status: Sadad supplied judgement in guided review; unit/label clarification rema
 **Regression proposal (assistant-suggested):** Once the convention is confirmed, verify scoped unit/Nos equivalence and ensure carton retains factor 12. Without confirmation, preserve unresolved quantity evidence rather than silently converting.
 
 **Grouping:** Specification/label clarification, specifically generic-unit interpretation. The proposed customer explanation must not be presented as a proven root cause.
+
+## Personal review 04 — ACM-T-0079
+Status: Sadad identified the unresolved pack variant and requested customer clarification. AI organised the evidence and edited this entry; the proposed safeguard is not yet implemented.
+
+**Observed failure:** Experimental policy selects ACM-BALL0364 for Vermont Ball Valve 1/2" SS304, quantity 1 ctn. Supplied label is blank (abstain).
+
+**Evidence:** Active standard ACM-BALL0364 and Bulk ACM-BALL0364B share brand, diameter and material, but carton factors are 12 and 144 Nos respectively. Both display zero stock. No barcode, buyer SKU or price distinguishes the two. Scores 1.0 and approximately 0.935 produce a margin above the experimental 0.05 threshold.
+
+**Sadad's judgement:** Review the pack variant and ask whether Standard or Bulk was intended; a wrong choice changes quantity twelvefold. Assistant refinement: phrase the question as 12 or 144 valves per carton to make the choice concrete.
+
+**Root cause:** Missing pack-variant ambiguity safeguard. Exact-name similarity and a score margin treated the extra Bulk token as sufficient distinction, although the order supplies no pack-count evidence. Zero stock is a separate fulfilment issue and is not needed to justify review here.
+
+**Cost class:** Wrong-auto proposal against the official label, with potential wrong-pack and twelvefold quantity consequences. The 12x quantity difference does not imply a measured 12x monetary loss.
+
+**Proposed fix:** Detect eligible product siblings sharing identity attributes but differing in item-specific pack conversions. Require disambiguating pack/identifier evidence before accepting one; otherwise return review with both codes and an ambiguous_pack reason. Keep confidence thresholds from overriding this guard.
+
+**Regression proposal (assistant-suggested):** A one-carton request with these two pack variants must review. An explicit, nonconflicting pack count or verified unique identifier may resolve the variant; tests must preserve tenant isolation and check the correct conversion. Do not generalise the factors to other products.
+
+**Grouping:** Missing pack-variant capability, distinct from Cases 1–3's unresolved label/business conventions. Original label retained.
