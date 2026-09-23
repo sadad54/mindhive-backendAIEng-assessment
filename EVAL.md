@@ -276,3 +276,15 @@ Status: Sadad supplied judgement in guided review; annotation/business-rule clar
 **Proposed response:** Confirm live stock and the business rule for shortages; separate identity from fulfilment status. Present partial supply/backorder options without changing quantity, promising a restock date or shipping without authorisation. Inventory alerts follow the business workflow, not an automatic replenishment action by the matcher. Preserve official labels/metrics pending adjudication.
 **Regression proposal (assistant-suggested):** Under a confirmed identity-only contract, changing available quantity from six to three retains the item code while a separate fulfilment check flags shortage. Partial fulfilment must not silently rewrite the order quantity.
 **Grouping:** Supported identity with insufficient-stock/label clarification, related to Case 1. No observed unit mismatch here.
+
+## Personal review 13 — ACM-T-0161
+Status: Sadad confirmed review until both quantity unit and product variant are established, after guided discussion. AI organised evidence and edited this entry.
+
+**Observed failure:** Experimental policy proposes standard ACM-ANGL0411 for Hitex Angle Grinder Disc 4.5" Flap, quantity 5 with blank UOM; supplied label is blank.
+**Evidence:** Active standard ACM-ANGL0411 and Bulk ACM-ANGL0411B have stock unit Packet, carton factors 10 and 144 respectively, and displayed stock 150 packets each. No order price, barcode or buyer SKU distinguishes them.
+**Sadad's judgement:** Keep in review until both unit and product variant are established. His initial suggestion that confirming cartons alone was enough was revised after comparing the two carton sizes.
+**Root cause:** Combined missing quantity-unit and pack-sibling ambiguity safeguards. The highest-scoring standard name does not determine whether five means packets or cartons, nor which item code applies.
+**Cost class:** Wrong-auto proposal against official labels (800 seconds-equivalent), with potential pack and quantity error. Five standard cartons means 50 packets; five Bulk cartons means 720 packets.
+**Proposed response:** Ask whether five means packets or cartons and which variant/pack size is intended. If cartons, ask whether each contains 10 or 144 packets. Even for packets, require evidence distinguishing codes or a verified business rule making them interchangeable; do not silently choose by stock or score.
+**Regression proposal (assistant-suggested):** Confirming only Carton must preserve review while both pack variants remain. Explicit, consistent unit and variant evidence can resolve the order. Quantity or inventory changes alone must not switch the code.
+**Grouping:** Same pack-variant capability gap as Cases 4 and 9, plus missing quantity unit as in Case 8. Original labels retained.
