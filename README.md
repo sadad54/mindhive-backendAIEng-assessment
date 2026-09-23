@@ -10,6 +10,8 @@ A deterministic, offline, tenant-scoped matcher with cautious automatic acceptan
 - **Sync:** durable SQLite outbox/cursor transactions, stable retry identity, explicit conflicts, bounded timestamp overlap and crash recovery. Original starter and vendor remain unchanged.
 - **Tests:** 56 focused tests currently pass. DESIGN.md is below 1,500 words; SCALE.md below 800. See each task document for evidence and limitations.
 
+For the remaining personal steps, follow [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md): fresh laptop checks, exact PowerShell commands, bundle creation and walkthrough preparation.
+
 ## Run on a clean machine
 Python 3.10+ and its standard library only. No installation, credentials, models or inference network calls. Run from the repository root. Data and original starter fixtures are included with explicit permission to publish them.
 

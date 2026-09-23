@@ -1,10 +1,10 @@
 """Fail closed on stale evaluation, policy/data drift, or measured regression gates."""
-import hashlib,json
+import argparse,hashlib,json
 from pathlib import Path
 ROOT=Path(__file__).parent
 
-def main():
- r=json.loads((ROOT/'reports/final_evaluation.json').read_text())
+def main(report_path=None):
+ r=json.loads((report_path or ROOT/'reports/final_evaluation.json').read_text())
  for name,digest in r['sha256'].items():
   assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,f'Stale report: {name}; rerun evaluation and review changes'
  v=r['mature']['validation'];m=v['overall']
@@ -20,4 +20,6 @@ def main():
   assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,f'Stale prediction: {name}'
  assert manifest['rows']==300
  print('PASS: report/source hashes, validation precision/coverage/value/recall/calibration, latency and prediction provenance')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--report',type=Path)
+ main(ap.parse_args().report)

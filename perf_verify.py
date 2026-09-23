@@ -1,10 +1,10 @@
 """Strict equality on baseline columns, explicit order, and independent p95 oracle."""
-import gzip,hashlib,json,platform,sqlite3,statistics,time
+import argparse,gzip,hashlib,json,platform,sqlite3,statistics,time
 from pathlib import Path
 from perf_report import run
 ROOT=Path(__file__).parent
 
-def main():
+def main(output=None):
  ref=json.load(gzip.open(ROOT/'data/report_reference.json.gz','rt'))
  times=[]
  for _ in range(5):
@@ -38,6 +38,8 @@ def main():
  'rows':len(rows),'strict_reference_equality':True,'max_reference_float_delta':max_delta,'strict_original_slice_equality':exact_original,'original_slice_within_1e_12':True,'reference_rounded_check':True,'p95_oracle_all_rows':True,'sqlite':sqlite3.sqlite_version,
  'python':platform.python_version(),'platform':platform.platform(),
  'source_sha256':hashlib.sha256((ROOT/'perf_report.py').read_bytes()).hexdigest()}
- (ROOT/'reports/perf_result.json').write_text(json.dumps(report,indent=2)+'\n');print(report)
+ (output or ROOT/'reports/perf_result.json').write_text(json.dumps(report,indent=2)+'\n');print(report)
  if not report['within_budget']:raise SystemExit('Over budget')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--output',type=Path)
+ main(ap.parse_args().output)

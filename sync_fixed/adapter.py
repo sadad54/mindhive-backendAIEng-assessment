@@ -23,10 +23,15 @@ class Store:
         CREATE UNIQUE INDEX IF NOT EXISTS one_pending ON outbox(id) WHERE state IN ('pending','uncertain');
         CREATE TABLE IF NOT EXISTS conflicts(id TEXT PRIMARY KEY,remote TEXT NOT NULL,version INTEGER NOT NULL,reason TEXT NOT NULL);
         ''')
-        with self.db:
-            row=self.db.execute("SELECT value FROM meta WHERE key='tenant'").fetchone()
-            if row and row[0]!=tenant:raise ValueError('Tenant store mismatch')
-            self.db.execute("INSERT OR IGNORE INTO meta VALUES ('tenant',?)",(tenant,))
+        try:
+            with self.db:
+                self.db.execute('BEGIN IMMEDIATE')
+                row=self.db.execute("SELECT value FROM meta WHERE key='tenant'").fetchone()
+                if row and row[0]!=tenant:raise ValueError('Tenant store mismatch')
+                self.db.execute("INSERT OR IGNORE INTO meta VALUES ('tenant',?)",(tenant,))
+        except BaseException:
+            self.db.close()
+            raise
         self.tenant=tenant
     def close(self):self.db.close()
     def record(self,eid):
